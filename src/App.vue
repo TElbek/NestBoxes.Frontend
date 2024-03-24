@@ -1,6 +1,15 @@
 <script setup>
+import { reactive } from 'vue';
 import { RouterView } from 'vue-router'
 import navigation from '@/components/main/navigation.vue'
+
+const state = reactive({
+    title: ''
+});
+
+function setTitle(title) {
+    state.title = title;
+};
 </script>
 
 <template>
