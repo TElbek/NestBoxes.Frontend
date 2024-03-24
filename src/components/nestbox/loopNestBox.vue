@@ -10,6 +10,6 @@
 import nestbox from '@/components/nestbox/nestbox.vue';
 
 const props = defineProps({
-    nestBoxList: []
+    nestBoxList: Array
 });
 </script>

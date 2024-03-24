@@ -12,7 +12,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item" v-for="route in router.options.routes">
+          <li class="nav-item" v-for="route in navBarRoutes">
             <router-link class="nav-link" aria-current="page" :to="routeName(route.name)" @click="toggleVisible()">{{
               route.meta.short }}</router-link>
           </li>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router'
 const router = useRouter();
 
@@ -42,6 +42,11 @@ function toggleVisible() {
 function routeName(name) {
   return "/" + (name != 'home' ? name : "");
 };
+
+const navBarRoutes = computed(() => {
+    return router.options.routes.filter((item) => item.meta.showInNavBar == true);
+});
+
 </script>
 
 <style scoped>

@@ -6,13 +6,19 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      meta: {title: 'Redekasser', short:'Redekasser'},
+      meta: {showInNavBar: true, title: 'Redekasser', short:'Redekasser'},
       component: () => import('../components/home/home.vue')
+    },
+    {
+      path: '/editBox/:boxId',
+      name: 'editBox',
+      meta: {showInNavBar: false, title: 'Rediger Redekasse', short:''},
+      component: () => import('../components/nestbox/editBox.vue')
     },
     {
       path: '/repair',
       name: 'repair',
-      meta: {title: 'Reparation', short:'Reparation'},
+      meta: {showInNavBar: true, title: 'Reparation', short:'Reparation'},
       component: () => import('../components/repair/repair.vue')
     },
   ]

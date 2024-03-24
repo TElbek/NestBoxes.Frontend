@@ -5,8 +5,9 @@
             <span class="fw-bold float-end">{{ formatDate(nestbox.lastInspection) }}</span>
         </div>
         <div class="card-body">
-            <div>Test</div>
-            <button type="button" class="btn btn-sm btn-outline-secondary mt-2 float-end">Rediger</button>
+            <router-link :to="`/editBox/${nestbox.No}`">
+                Rediger
+            </router-link>
         </div>
     </div>
 </template>
@@ -29,5 +30,11 @@ function formatDate(date) {
 <style scoped>
     .card-body {
         padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.8rem;
     }
 </style>
