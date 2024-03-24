@@ -4,7 +4,7 @@ import navigation from '@/components/main/navigation.vue'
 </script>
 
 <template>
-  <div>
+  <div class="container-fluid">
     <navigation></navigation>
     <router-view></router-view>
   </div>

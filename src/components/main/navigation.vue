@@ -8,13 +8,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" v-for="item in state.navigationData">
-            <router-link class="nav-link" aria-current="page" :to="routeName(item.attributes.Name)" @click="toggleVisible()">{{
-              item.attributes.Caption }}</router-link>
+            <router-link class="nav-link" aria-current="page" :to="routeName(item.attributes.name)" @click="toggleVisible()">{{
+              item.attributes.caption }}</router-link>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link " href="#">Login</a>
+          <li class="nav-item">            
           </li>
         </ul>
       </div>
@@ -25,13 +24,17 @@
 import { reactive } from 'vue';
 
 const state = reactive({
-    navigationData: [],
+    navigationData: [{id:1, attributes: {name:'', caption: 'Hjem'}}],
     visible: false
 });
 
 function toggleVisible() {
     state.visible = !state.visible;
 }
+
+function routeName(name) {
+  return "/" + (name != undefined ? name : "");
+};
 </script>
 
 <style scoped>
