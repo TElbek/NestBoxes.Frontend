@@ -8,7 +8,7 @@
             "eggs": "",
             "chicks": "",
             "remark": "",
-            "needsRepair": "false"
+            "needsRepair": false
           },
           {
             "lastInspection": "2023-04-19T13:25:43.511Z",
@@ -18,7 +18,7 @@
             "eggs": "false",
             "chicks": "false",
             "remark": "",
-            "needsRepair": "false"
+            "needsRepair": true
           },
           {
             "lastInspection": "2023-04-11T13:25:43.511Z",
@@ -28,7 +28,7 @@
             "eggs": "true",
             "chicks": "false",
             "remark": "",
-            "needsRepair": "false"
+            "needsRepair": false
           },
           {
             "lastInspection": "2023-05-23T13:25:43.511Z",
@@ -38,7 +38,7 @@
             "eggs": "",
             "chicks": "true",
             "remark": "",
-            "needsRepair": "false"
+            "needsRepair": false
           },
           {
             "lastInspection": "2023-04-01T13:25:43.511Z",
@@ -48,7 +48,7 @@
             "eggs": "true",
             "chicks": "",
             "remark": "",
-            "needsRepair": "false"
+            "needsRepair": true
           },
           {
             "lastInspection": "2023-04-23T13:25:43.511Z",
@@ -58,7 +58,7 @@
             "eggs": "true",
             "chicks": "",
             "remark": "",
-            "needsRepair": "false"
+            "needsRepair": false
           }
    ]   
 }

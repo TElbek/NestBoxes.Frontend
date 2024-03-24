@@ -2,6 +2,7 @@
 import { reactive } from 'vue';
 import { RouterView } from 'vue-router'
 import navigation from '@/components/main/navigation.vue'
+import routeTitle from '@/components/main/title.vue'
 
 const state = reactive({
     title: ''
@@ -15,6 +16,7 @@ function setTitle(title) {
 <template>
   <div class="container-fluid">
     <navigation></navigation>
+    <routeTitle></routeTitle>
     <router-view></router-view>
   </div>
 </template>

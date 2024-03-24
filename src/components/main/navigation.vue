@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg sticky-top bg-white">
+    <nav class="navbar navbar-expand-lg sticky-top bg-white mb-2">
         <div class="navbar-header">
           <router-link aria-current="page" to="/" active-class="empty">
             <img class="site-logo" src="@/assets/nestbox.png" width="80">
@@ -18,6 +18,9 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">          
+          <li class="nav-item">
+            <a href="#" class="nav-link">Login</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -42,6 +45,11 @@ function routeName(name) {
 </script>
 
 <style scoped>
+.navbar {
+  --bs-navbar-padding-y: 0px;
+}
+
+
 .navbar-toggler:focus,
 .navbar-toggler:active,
 .navbar-toggler-icon:focus {

@@ -1,5 +1,5 @@
 <template>
-    <div class="h4">{{ route.meta.title }}</div>
+    <div class="d-lg-none h4 p-1">{{ route.meta.title }}</div>
 </template>
 
 <script setup>
