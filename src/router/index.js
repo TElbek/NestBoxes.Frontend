@@ -21,5 +21,4 @@ const router = createRouter({
 router.afterEach((to, from) => {
   document.title = to.meta.title + ' - Fuglegruppen';
 });
-
 export default router
