@@ -1,11 +1,11 @@
 <template>
     <div class="card p-2 shadow-sm">
         <div class="card-title">
-            <span class="fw-bold">Kasse {{ nestbox.No }}</span>
-            <span class="fw-bold float-end">{{ formatDate(nestbox.lastInspection) }}</span>
+            <span class="fw-bold">Kasse {{ nestbox.boxId }}</span>
+            <!-- <span class="fw-bold float-end">{{ formatDate(nestbox.lastInspection) }}</span> -->
         </div>
         <div class="card-body">
-            <router-link :to="`/editBox/${nestbox.No}`">
+            <router-link :to="`/editBox/${nestbox.boxId}`">
                 Rediger
             </router-link>
         </div>

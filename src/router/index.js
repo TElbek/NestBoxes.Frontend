@@ -15,12 +15,12 @@ const router = createRouter({
       meta: {showInNavBar: false, title: 'Rediger Redekasse', short:''},
       component: () => import('../components/nestbox/editBox.vue')
     },
-    {
-      path: '/repair',
-      name: 'repair',
-      meta: {showInNavBar: true, title: 'Reparation', short:'Reparation'},
-      component: () => import('../components/repair/repair.vue')
-    },
+    // {
+    //   path: '/repair',
+    //   name: 'repair',
+    //   meta: {showInNavBar: true, title: 'Reparation', short:'Reparation'},
+    //   component: () => import('../components/repair/repair.vue')
+    // },
   ]
 })
 

@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import data from '@/data/nestbox.json';
+import api from '@/api';
 import loopNestBox from '@/components/nestbox/loopNestBox.vue';
 
 import {onMounted, reactive } from 'vue';
@@ -15,6 +15,11 @@ const state = reactive({
 });
 
 onMounted(() => {
-    state.nestBoxList = data.nestBoxes;
+    getNestBoxes();    
 }); 
+
+function getNestBoxes() {
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox')
+    .then(res => state.nestBoxList = res.data)    
+};
 </script>
