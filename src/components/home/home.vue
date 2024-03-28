@@ -19,7 +19,7 @@ onMounted(() => {
 }); 
 
 function getNestBoxes() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox')
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/feature')
     .then(res => state.nestBoxList = res.data)    
 };
 </script>

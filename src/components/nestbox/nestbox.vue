@@ -1,11 +1,12 @@
 <template>
     <div class="card p-2 shadow-sm">
         <div class="card-title">
-            <span class="fw-bold">Kasse {{ nestbox.boxId }}</span>
+            <span class="fw-bold">Kasse {{ nestbox.properties.boxId }}</span>
+            <span v-if="nestbox.properties.isOffline">Offline</span>
         </div>
         <div class="card-body">
-            <router-link :to="`/editBox/${nestbox.boxId}`">
-                Tilføj
+            <router-link :to="`/editBox/${nestbox.properties.fid}`">
+                Tilføj Status
             </router-link>
         </div>
     </div>
