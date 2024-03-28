@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="h4">
-            Rediger Redekasse {{ route.params.boxId }}
+            Redekasse {{ route.params.boxId }}
         </div>
         <div class="btn-grid">
             <button class="btn btn-sm btn-success" type="button" @click="save">Gem</button>
