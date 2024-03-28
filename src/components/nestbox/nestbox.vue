@@ -2,7 +2,7 @@
     <div class="card p-2 shadow-sm">
         <div class="card-title">
             <span class="fw-bold">Kasse {{ nestbox.properties.boxId }}</span>
-            <span v-if="nestbox.properties.isOffline">Offline</span>
+            <span class="ml-1" v-if="nestbox.properties.isOffline">Nedtaget</span>
         </div>
         <div class="card-body">
             <router-link :to="`/editBox/${nestbox.properties.fid}`">
