@@ -1,12 +1,10 @@
 <template>
     <div class="card p-2 shadow-sm">
-        <div class="card-title">
-            <span class="h3">{{ nestbox.properties.boxId }}</span>
-            <span class="ml-1" v-if="nestbox.properties.isOffline">Nedtaget</span>
-        </div>
         <div class="card-body">
             <router-link :to="`/editBox/${nestbox.properties.fid}`">
-                Tilføj Status
+                <div class="card-title">
+                    <span class="h3">{{ nestbox.properties.boxId }}</span>
+                </div>
             </router-link>
         </div>
     </div>
@@ -28,13 +26,13 @@ function formatDate(date) {
 </script>
 
 <style scoped>
-    .card-body {
-        padding: 0;
-    }
+.card-body {
+    padding: 0;
+}
 
-    a {
-        text-decoration: none;
-        color: black;
-        font-size: 0.8rem;
-    }
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.8rem;
+}
 </style>
