@@ -20,7 +20,7 @@ onMounted(() => {
 }); 
 
 function getNestBoxes() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme')
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=8')
     .then(res => {
         state.nestBoxList = res.data;
         state.hasData = true;
