@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <loopNestBox :nestBoxList="state.nestBoxList"></loopNestBox>
+    <div v-if="state.hasData">
+        <loopNestBox :nestBoxList="state.nestBoxList.boxesForChecking"></loopNestBox>
     </div>
 </template>
 
@@ -11,7 +11,8 @@ import loopNestBox from '@/components/nestbox/loopNestBox.vue';
 import {onMounted, reactive } from 'vue';
 
 const state = reactive({
-    nestBoxList: []
+    nestBoxList: {},
+    hasData: false
 });
 
 onMounted(() => {
@@ -19,7 +20,10 @@ onMounted(() => {
 }); 
 
 function getNestBoxes() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/feature')
-    .then(res => state.nestBoxList = res.data)    
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme')
+    .then(res => {
+        state.nestBoxList = res.data;
+        state.hasData = true;
+    })    
 };
 </script>

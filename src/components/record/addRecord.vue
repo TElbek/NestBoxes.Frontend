@@ -53,7 +53,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
-import { onMounted, reactive, computed } from 'vue';
+import { onMounted, reactive } from 'vue';
 import api from '@/api';
 
 const router = useRouter();
