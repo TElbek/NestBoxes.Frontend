@@ -1,6 +1,6 @@
 <template>
     <div v-if="state.hasData">
-        <div class="h4">
+        <div class="h4" v-if="state.hasBox">
             Redekasse {{ state.nestBox.properties.boxId }} - {{formatDate(state.record.datetime) }}
         </div>
         <form>
@@ -26,7 +26,18 @@
                     <input class="form-control" type="number" id="chicks-input" v-model="state.record.nesting.chicks" />
                 </div>
             </div>
-          
+
+            <div class="row  mb-3">
+                <div class="col">
+                    <label for="ring-input-from" class="form-check-label">Ringe - fra</label>
+                    <input class="form-control" type="number" id="ring-input-from" v-model="state.record.rings[0]" />
+                </div>
+                <div class="col">
+                    <label for="ring-input-to" class="form-check-label">Ringe - til</label>
+                    <input class="form-control" type="number" id="ring-input-to" v-model="state.record.rings[1]" />
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="comment-text" class="form-check-label">Kommentarer</label>
                 <textarea rows="2" class="form-control" id="comment-text" v-model="state.record.comment" />
@@ -50,6 +61,7 @@ const route = useRoute();
 
 const state = reactive({
     hasData: false,
+    hasBox: false,
     statusList: [],
     record: {},
     nestBox: {}
@@ -67,6 +79,7 @@ function getNestBox() {
     api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/feature/' + route.params.fid)
         .then(res => {
             state.nestBox = res.data;
+            state.hasBox = true;
         })
 }
 

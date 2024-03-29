@@ -10,10 +10,10 @@ const router = createRouter({
       component: () => import('../components/home/home.vue')
     },
     {
-      path: '/editBox/:fid',
-      name: 'editBox',
-      meta: {showInNavBar: false, title: 'Rediger Redekasse', short:''},
-      component: () => import('../components/nestbox/editBox.vue')
+      path: '/addRecord/:fid',
+      name: 'addRecord',
+      meta: {showInNavBar: false, title: 'Opret Registrering', short:''},
+      component: () => import('../components/record/addRecord.vue')
     },
     {
       path: '/login',

@@ -1,9 +1,9 @@
 <template>
     <div class="card p-2 shadow-sm">
         <div class="card-body">
-            <router-link :to="`/editBox/${nestbox.properties.fid}`">
+            <router-link :to="`/addRecord/${nestbox.properties.fid}`">
                 <div class="card-title">
-                    <span class="h3">{{ nestbox.properties.boxId }}</span>
+                    <span class="h5">{{ nestbox.properties.boxId }}</span>
                 </div>
             </router-link>
         </div>
