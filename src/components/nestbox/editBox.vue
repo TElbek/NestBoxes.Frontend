@@ -6,7 +6,6 @@
         <div class="btn-grid">
             <button class="btn btn-sm btn-success" type="button" @click="save">Gem</button>
             <button class="btn btn-sm btn-dark" type="button" @click="cancel">Fortryd</button>
-            <button class="btn btn-sm" :class="offlineBtnClass" type="button" @click="setOffline">{{offlineCaption}}</button>
         </div>
     </div>
 </template>
@@ -25,14 +24,6 @@ const state = reactive({
     nestBox: {}
 });
 
-const offlineCaption = computed(() => {
-    return state.nestBox.properties.isOffline ? "Montere" : "Nedtage";
-});
-
-const offlineBtnClass = computed(() => {
-    return state.nestBox.properties.isOffline ? "btn-success" : "btn-danger";
-});
-
 function getNestBox() {
     api.get(import.meta.env.VITE_VUE_API_BASE_URL + '/nestbox/feature/' +  route.params.boxId)
     .then(res => {
@@ -47,13 +38,6 @@ function save() {
 
 function cancel() {
     router.go(-1);
-}
-
-function setOffline() {
-    api.post(
-        import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/takedown/' + 
-        state.nestBox.properties.fid + '/' + !state.nestBox.properties.isOffline)
-        .then(res => router.go(-1));
 }
 
 onMounted(() => {
