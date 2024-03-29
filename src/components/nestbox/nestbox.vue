@@ -1,7 +1,7 @@
 <template>
     <div class="card p-2 shadow-sm">
         <div class="card-title">
-            <span class="fw-bold">Kasse {{ nestbox.properties.boxId }}</span>
+            <span class="h3">{{ nestbox.properties.boxId }}</span>
             <span class="ml-1" v-if="nestbox.properties.isOffline">Nedtaget</span>
         </div>
         <div class="card-body">
