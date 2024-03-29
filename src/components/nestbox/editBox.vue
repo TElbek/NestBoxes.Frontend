@@ -1,12 +1,12 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4">
-            Redekasse {{ route.params.boxId }}
+            Redekasse {{ route.params.boxId }} - {{ state.record.datetime }}
         </div>
         <form>
             <div class="mb-3">
                 <label for="species-input" class="form-check-label">Art</label>
-                <input class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
+                <input autofocus class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
             </div>
             <div class="mb-3">
                 <label for="status-select" class="form-check-label">Status</label>
@@ -16,7 +16,7 @@
                     </option>
                 </select>
             </div>
-            <div class="row">
+            <div class="row  mb-3">
                 <div class="col">
                     <label for="eggs-input" class="form-check-label">Æg</label>
                     <input class="form-control" type="number" id="eggs-input" v-model="state.record.nesting.eggs" />
