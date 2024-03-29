@@ -1,7 +1,7 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4">
-            Redekasse {{ route.params.boxId }} - {{ state.record.datetime }}
+            Redekasse {{ route.params.boxId }} - {{formatDate(state.record.datetime) }}
         </div>
         <form>
             <div class="mb-3">
@@ -83,6 +83,15 @@ onMounted(() => {
     getNestBox();
     getStatusList();
 });
+
+function formatDate(date) {
+    var options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    }
+    return new Date(date).toLocaleDateString('da-dk', options);
+}
 </script>
 
 <style scoped>
