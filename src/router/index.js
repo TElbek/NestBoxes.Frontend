@@ -10,7 +10,7 @@ const router = createRouter({
       component: () => import('../components/home/home.vue')
     },
     {
-      path: '/editBox/:boxId',
+      path: '/editBox/:fid',
       name: 'editBox',
       meta: {showInNavBar: false, title: 'Rediger Redekasse', short:''},
       component: () => import('../components/nestbox/editBox.vue')

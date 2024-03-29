@@ -1,7 +1,7 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4">
-            Redekasse {{ route.params.boxId }} - {{formatDate(state.record.datetime) }}
+            Redekasse {{ state.nestBox.properties.boxId }} - {{formatDate(state.record.datetime) }}
         </div>
         <form>
             <div class="mb-3">
@@ -51,14 +51,22 @@ const route = useRoute();
 const state = reactive({
     hasData: false,
     statusList: [],
-    record: {}
+    record: {},
+    nestBox: {}
 });
 
-function getNestBox() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/record/' + route.params.boxId + "/new")
+function getEmptyRecord() {
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/record/' + route.params.fid + "/new")
         .then(res => {
             state.record = res.data;
             state.hasData = true;
+        })
+}
+
+function getNestBox() {
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/feature/' + route.params.fid)
+        .then(res => {
+            state.nestBox = res.data;
         })
 }
 
@@ -81,6 +89,7 @@ function cancel() {
 
 onMounted(() => {
     getNestBox();
+    getEmptyRecord();
     getStatusList();
 });
 
