@@ -1,9 +1,12 @@
 <template>
     <div v-if="state.hasRecord">
         <span class="fs-6">{{ state.recordInfo.nesting.species }}</span>
-        <!-- <span>{{ addInfo }}</span>
-        <div>Eggs: {{ state.recordInfo.nesting.eggs }} {{ hasEggs }}</div>
-        <div>Chicks: {{ state.recordInfo.nesting.chicks }} {{hasChicks }}</div> -->
+        <!-- <div class="row">
+            <div class="col-auto">Æg</div>
+            <div class="col">{{ state.recordInfo.nesting.eggs }}</div>
+            <div class="col-auto">Unger</div>
+            <div class="col">{{ state.recordInfo.nesting.chicks }}</div>
+        </div> -->
     </div>
     <div v-else>
         <span>&nbsp;</span>
@@ -21,26 +24,6 @@ const state = reactive({
 
 const props = defineProps({
     fid: Number
-});
-
-const hasEggs = computed(() => state.hasRecord && state.recordInfo.nesting.eggs != null);
-const hasChicks = computed(() => state.hasRecord && state.recordInfo.nesting.chicks !== null);
-
-const eggs = computed(() => state.hasRecord ? state.recordInfo.nesting.eggs : 0);
-const chicks = computed(() => state.hasRecord ? state.recordInfo.nesting.chicks : 0);
-
-const addInfo = computed(() => {
-    var info = "";
-    if (hasEggs || hasChicks) {
-        info += " med ";
-    }
-    if (hasEggs) {
-        info += eggs.value + " æg";
-    };
-    if (hasChicks) {
-        info += chicks.value + " unger";
-    };
-    return info;
 });
 
 function getRecordInfo() {
