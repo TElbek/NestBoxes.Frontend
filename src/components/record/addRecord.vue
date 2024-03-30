@@ -1,7 +1,7 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4" v-if="state.hasBox">
-            Redekasse {{ state.nestBox.properties.boxId }} - {{formatDate(state.record.datetime) }}
+            Kasse {{ state.nestBox.properties.boxId }} - {{formatDate(state.record.datetime) }}
         </div>
         <form>
             <div class="mb-3">
@@ -108,9 +108,8 @@ onMounted(() => {
 
 function formatDate(date) {
     var options = {
-        year: 'numeric',
-        month: '2-digit',
         day: '2-digit',
+        month: 'long',
         hour: '2-digit',
         minute: '2-digit'
     }

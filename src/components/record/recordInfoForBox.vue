@@ -1,12 +1,12 @@
 <template>
     <div v-if="state.hasRecord">
-        <span class="fs-6">{{ state.recordInfo.nesting.species }}</span>
-        <!-- <div class="row">
-            <div class="col-auto">Æg</div>
-            <div class="col">{{ state.recordInfo.nesting.eggs }}</div>
-            <div class="col-auto">Unger</div>
-            <div class="col">{{ state.recordInfo.nesting.chicks }}</div>
-        </div> -->
+        <slot class="mr-1"></slot>
+        <span class="h6">{{ state.recordInfo.nesting.species }}</span>
+        <div class="fs-small text-nowrap">
+            <span>{{ formatDate(state.recordInfo.datetime) }}&nbsp;-&nbsp;</span>
+            <span v-if="state.recordInfo.nesting.eggs != null">&nbsp;{{ state.recordInfo.nesting.eggs }} Æg</span>
+            <span v-if="state.recordInfo.nesting.chicks != null">&nbsp;{{ state.recordInfo.nesting.chicks }} Unger</span>
+        </div>
     </div>
     <div v-else>
         <span>&nbsp;</span>
@@ -36,7 +36,21 @@ function getRecordInfo() {
         })
 }
 
+function formatDate(date) {
+    var options = {
+        month: 'long',
+        day: '2-digit'
+    }
+    return new Date(date).toLocaleDateString('da-dk', options);
+}
+
 onMounted(() => {
     getRecordInfo();
 });
 </script>
+
+<style scoped>
+.fs-small {
+    font-size: 0.8rem;
+}
+</style>

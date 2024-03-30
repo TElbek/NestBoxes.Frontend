@@ -2,11 +2,10 @@
     <div class="card p-2 shadow-sm">
         <div class="card-body">
             <router-link :to="`/addRecord/${nestbox.fid}`">
-                <div class="card-title">
-                    <span class="h5">{{ nestbox.boxId }}</span>
-                </div>
+                <record-info :fid="nestbox.fid">
+                    <div class="h6">{{ nestbox.boxId }}</div>
+                </record-info>
             </router-link>
-            <record-info :fid="nestbox.fid"></record-info>
         </div>
     </div>
 </template>
@@ -36,6 +35,6 @@ function formatDate(date) {
 a {
     text-decoration: none;
     color: black;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 </style>
