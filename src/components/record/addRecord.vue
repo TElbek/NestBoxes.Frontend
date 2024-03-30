@@ -5,16 +5,16 @@
         </div>
         <form>
             <div class="mb-3">
-                <label for="species-input" class="form-check-label">Art</label>
-                <input autofocus class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
-            </div>
-            <div class="mb-3">
                 <label for="status-select" class="form-check-label">Status</label>
                 <select class="form-select" id="status-select" v-model="state.record.status">
                     <option v-for="option in state.statusList" :value="option">
                         {{ option.statusName }}
                     </option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="species-input" class="form-check-label">Art</label>
+                <input autofocus class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
             </div>
             <div class="row  mb-3">
                 <div class="col">

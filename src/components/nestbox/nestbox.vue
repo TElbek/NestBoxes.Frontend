@@ -3,6 +3,11 @@
         <div class="card-body">
             <router-link :to="`/addRecord/${nestbox.fid}`">
                 <record-info :fid="nestbox.fid" v-if="!showBrief">
+                    <div class="h6 float-end">
+                        <span v-if="nestbox.altitude == 2">Stige</span>                        
+                        <span v-if="nestbox.altitude == 2">&nbsp;-&nbsp;</span>
+                        <span>Zone: {{nestbox.zone }}</span>
+                    </div>
                     <div class="h6">{{ nestbox.boxId }}</div>
                 </record-info>
                 <div v-else class="h6">{{ nestbox.boxId }}</div>
@@ -18,15 +23,6 @@ const props = defineProps({
     nestbox: {},
     showBrief : false
 });
-
-function formatDate(date) {
-    var options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    }
-    return new Date(date).toLocaleDateString('da-dk', options);
-}
 </script>
 
 <style scoped>
