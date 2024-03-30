@@ -1,35 +1,37 @@
 <template>
     <ul class="nav nav-pills" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[state.activeTab == 0 ? 'border border-2' : '']"
+            <button class="nav-link" :class="[tabSelected.index == 0 ? 'border border-2' : '']"
                 @click="setActiveTab(0)">Tjekkes</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[state.activeTab == 1 ? 'border border-2' : '']"
+            <button class="nav-link" :class="[tabSelected.index == 1 ? 'border border-2' : '']"
                 @click="setActiveTab(1)">OK</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[state.activeTab == 2 ? 'border border-2' : '']"
+            <button class="nav-link" :class="[tabSelected.index == 2 ? 'border border-2' : '']"
                 @click="setActiveTab(2)">Ukendt</button>
         </li>
     </ul>
     <div class="mt-2 tab-content">
-        <loopNestBox v-if="state.activeTab == 0" :nestBoxList="state.nestBoxList.boxesForChecking"></loopNestBox>
-        <loopNestBox v-if="state.activeTab == 1" :nestBoxList="state.nestBoxList.boxesChecked"></loopNestBox>
-        <loopNestBox :showBrief="true" v-if="state.activeTab == 2" :nestBoxList="state.nestBoxList.boxesNotChecked"></loopNestBox>
+        <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="state.nestBoxList.boxesForChecking"></loopNestBox>
+        <loopNestBox v-if="tabSelected.index == 1" :nestBoxList="state.nestBoxList.boxesChecked"></loopNestBox>
+        <loopNestBox v-if="tabSelected.index == 2" :nestBoxList="state.nestBoxList.boxesNotChecked" :showBrief="true" ></loopNestBox>
     </div>
 </template>
 
 <script setup>
 import api from '@/api';
+import {useTabSelectedStore} from '@/stores/overviewtabselected.js';
 import loopNestBox from '@/components/nestbox/loopNestBox.vue';
 
-import { onMounted, reactive, computed } from 'vue';
+const tabSelected = useTabSelectedStore()
+
+import { onMounted, reactive } from 'vue';
 
 const state = reactive({
     nestBoxList: {},
     hasData: false,
-    activeTab: 0
 });
 
 
@@ -38,7 +40,7 @@ onMounted(() => {
 });
 
 function setActiveTab(tabIndex) {
-    state.activeTab = tabIndex;
+    tabSelected.set(tabIndex);
 }
 
 function getNestBoxes() {

@@ -87,7 +87,6 @@ function getStatusList() {
     api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/status')
         .then(res => {
             state.statusList = res.data;
-            state.hasData = true;
         })
 }
 
