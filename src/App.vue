@@ -2,7 +2,6 @@
 import { reactive } from 'vue';
 import { RouterView } from 'vue-router'
 import navigation from '@/components/main/navigation.vue'
-import routeTitle from '@/components/main/title.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute();
 
@@ -18,7 +17,6 @@ function setTitle(title) {
 <template>
   <div class="container-fluid">
     <navigation></navigation>
-    <routeTitle v-if="route.meta.showInNavBar == true"></routeTitle>
     <router-view></router-view>
   </div>
 </template>
