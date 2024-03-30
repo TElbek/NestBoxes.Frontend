@@ -10,7 +10,7 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" :class="[state.activeTab == 2 ? 'border border-2' : '']"
-                @click="setActiveTab(2)">Mangler</button>
+                @click="setActiveTab(2)">Ukendt</button>
         </li>
     </ul>
     <div class="mt-2 tab-content">
