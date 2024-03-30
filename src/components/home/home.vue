@@ -1,16 +1,16 @@
 <template>
-    <ul class="nav nav-pills" role="tablist">
+    <ul class="nav nav-pills" role="tablist" v-if="state.hasData">
         <li class="nav-item" role="presentation">
             <button class="nav-link" :class="[tabSelected.index == 0 ? 'border border-2' : '']"
-                @click="setActiveTab(0)">Tjekkes</button>
+                @click="setActiveTab(0)">Tjekkes ({{ state.nestBoxList.boxesForChecking.length }})</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" :class="[tabSelected.index == 1 ? 'border border-2' : '']"
-                @click="setActiveTab(1)">OK</button>
+                @click="setActiveTab(1)">OK ({{ state.nestBoxList.boxesChecked.length }})</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" :class="[tabSelected.index == 2 ? 'border border-2' : '']"
-                @click="setActiveTab(2)">Ukendt</button>
+                @click="setActiveTab(2)">Ukendt ({{ state.nestBoxList.boxesNotChecked.length }})</button>
         </li>
     </ul>
     <div class="mt-2 tab-content">
