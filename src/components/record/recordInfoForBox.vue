@@ -1,11 +1,12 @@
 <template>
+    <slot class="mr-1"></slot>
     <div v-if="state.hasRecord">
-        <slot class="mr-1"></slot>
         <span class="h6">{{ state.recordInfo.nesting.species }}</span>
         <div class="fs-small text-nowrap">
             <span>{{ formatDate(state.recordInfo.datetime) }}&nbsp;-&nbsp;</span>
             <span v-if="state.recordInfo.nesting.eggs != null">&nbsp;{{ state.recordInfo.nesting.eggs }} Æg</span>
-            <span v-if="state.recordInfo.nesting.chicks != null">&nbsp;{{ state.recordInfo.nesting.chicks }} Unger</span>
+            <span v-if="state.recordInfo.nesting.chicks != null">&nbsp;{{ state.recordInfo.nesting.chicks }}
+                Unger</span>
         </div>
     </div>
     <div v-else>
