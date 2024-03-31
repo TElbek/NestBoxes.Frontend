@@ -47,7 +47,7 @@ function setActiveTab(tabIndex) {
 }
 
 function getNestBoxes() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=8')
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=' + import.meta.env.VITE_VUE_CHECKME_DAYSAHEAD)
         .then(res => {
             state.nestBoxList = res.data;;
             state.hasData = true;
