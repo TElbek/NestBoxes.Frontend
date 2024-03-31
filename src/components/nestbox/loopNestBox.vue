@@ -1,5 +1,5 @@
 <template>
-    <div :class="[showBrief ? 'row row-cols-6' : 'row row-cols-1 row-cols-sm-2 row-cols-xl-6']" class="g-2">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-6 g-2">
         <div v-for="box in nestBoxList" class="col">
             <nestbox :nestbox="box" :showBrief="showBrief"></nestbox>
         </div>

@@ -4,9 +4,9 @@
         <span class="h6">{{ state.recordInfo.nesting.species }}</span>
         <div class="fs-small text-nowrap">
             <span>{{ formatDate(state.recordInfo.datetime) }}&nbsp;-&nbsp;</span>
-            <span v-if="state.recordInfo.nesting.eggs != null">&nbsp;{{ state.recordInfo.nesting.eggs }} Æg</span>
-            <span v-if="state.recordInfo.nesting.chicks != null">&nbsp;{{ state.recordInfo.nesting.chicks }}
-                Unger</span>
+            <span v-if="state.recordInfo.nesting.eggs != null">&nbsp;{{ state.recordInfo.nesting.eggs }}</span>
+            <span v-if="state.recordInfo.nesting.chicks != null">&nbsp;{{ state.recordInfo.nesting.chicks }}</span>
+            <span>&nbsp;{{ state.recordInfo.status.statusName }}</span>
         </div>
     </div>
     <div v-else>
@@ -16,7 +16,7 @@
 
 <script setup>
 import api from '@/api';
-import { onMounted, reactive, computed } from 'vue';
+import { onMounted, reactive } from 'vue';
 
 const state = reactive({
     recordInfo: {},
