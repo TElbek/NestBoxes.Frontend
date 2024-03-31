@@ -1,20 +1,20 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4" v-if="state.hasBox">
-            Kasse {{ state.nestBox.properties.boxId }} - {{formatDate(state.record.datetime) }}
+            Kasse {{ state.nestBox.properties.boxId }}: {{formatDate(state.record.datetime) }}
         </div>
         <form>
             <div class="mb-3">
                 <label for="status-select" class="form-check-label">Status</label>
-                <select class="form-select" id="status-select" v-model="state.record.status">
-                    <option v-for="option in state.statusList" :value="option">
+                <select class="form-select" id="status-select" v-model="state.record.status" v-focus>
+                    <option v-for="(option, index) in state.statusList" :value="option">
                         {{ option.statusName }}
                     </option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="species-input" class="form-check-label">Art</label>
-                <input autofocus class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
+                <input class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
             </div>
             <div class="row  mb-3">
                 <div class="col">
@@ -30,11 +30,11 @@
             <div class="row  mb-3">
                 <div class="col">
                     <label for="ring-input-from" class="form-check-label">Ringe - fra</label>
-                    <input class="form-control" type="number" id="ring-input-from" v-model="state.record.rings[0]" />
+                    <input class="form-control" type="text" id="ring-input-from" v-model="state.record.rings[0]" />
                 </div>
                 <div class="col">
                     <label for="ring-input-to" class="form-check-label">Ringe - til</label>
-                    <input class="form-control" type="number" id="ring-input-to" v-model="state.record.rings[1]" />
+                    <input class="form-control" type="text" id="ring-input-to" v-model="state.record.rings[1]" />
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
             </div>
         </form>
         <div class="btn-grid">
-            <button class="btn btn-sm btn-success" type="button" @click="save">Gem</button>
+            <button class="btn btn-sm btn-success" type="button" @click="save" :disabled="!canDoSave">Gem</button>
             <button class="btn btn-sm btn-dark" type="button" @click="cancel">Fortryd</button>
         </div>
     </div>
@@ -53,7 +53,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, computed } from 'vue';
 import api from '@/api';
 
 const router = useRouter();
@@ -65,6 +65,12 @@ const state = reactive({
     statusList: [],
     record: {},
     nestBox: {}
+});
+
+const canDoSave = computed(() => {
+    return state.record.status.statusName != null &&
+           state.record.nesting.species != null && 
+           state.record.nesting.species.length > 0;
 });
 
 function getEmptyRecord() {
