@@ -1,28 +1,26 @@
 <template>
-    <ul class="nav nav-pills" role="tablist" v-if="state.hasData">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[tabSelected.index == 0 ? 'btn-selected' : '']"
-                @click="setActiveTab(0)">Tjekkes ({{ state.nestBoxList.boxesForChecking.length }})</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[tabSelected.index == 1 ? 'btn-selected' : '']"
-                @click="setActiveTab(1)">OK ({{ state.nestBoxList.boxesChecked.length }})</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[tabSelected.index == 2 ? 'btn-selected' : '']"
-                @click="setActiveTab(2)">Ukendt ({{ state.nestBoxList.boxesNotChecked.length }})</button>
-        </li>
-    </ul>
+    <div class="btn-grid" v-if="state.hasData">
+        <button class="nav-link" :class="[tabSelected.index == 0 ? 'btn-selected' : '']"
+            @click="setActiveTab(0)">Tjekkes ({{ state.nestBoxList.boxesForChecking.length }})</button>
+
+        <button class="nav-link" :class="[tabSelected.index == 1 ? 'btn-selected' : '']" @click="setActiveTab(1)">OK
+            ({{ state.nestBoxList.boxesChecked.length }})</button>
+
+        <button class="nav-link" :class="[tabSelected.index == 2 ? 'btn-selected' : '']" @click="setActiveTab(2)">Ukendt
+            ({{ state.nestBoxList.boxesNotChecked.length }})</button>
+    </div>
     <div class="mt-2" v-if="state.hasData">
-        <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList"></loopNestBox>
-        <loopNestBox v-if="tabSelected.index == 1" :nestBoxList="boxesCheckedList"></loopNestBox>
-        <loopNestBox v-if="tabSelected.index == 2" :nestBoxList="boxesNotCheckedList" :showBrief="true" ></loopNestBox>
+        <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
+        </loopNestBox>
+        <loopNestBox v-if="tabSelected.index == 1" :nestBoxList="boxesCheckedList">
+        </loopNestBox>
+        <loopNestBox v-if="tabSelected.index == 2" :nestBoxList="boxesNotCheckedList" :showBrief="true"></loopNestBox>
     </div>
 </template>
 
 <script setup>
 import api from '@/api';
-import {useTabSelectedStore} from '@/stores/overviewtabselected.js';
+import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import loopNestBox from '@/components/nestbox/loopNestBox.vue';
 
 const tabSelected = useTabSelectedStore()
@@ -43,8 +41,8 @@ onMounted(() => {
 });
 
 function setActiveTab(tabIndex) {
-    tabSelected.set(tabIndex);    
-}
+    tabSelected.set(tabIndex);
+};
 
 function getNestBoxes() {
     api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=' + import.meta.env.VITE_VUE_CHECKME_DAYSAHEAD)
@@ -65,10 +63,26 @@ function getSortedByFid(list) {
 }
 
 button {
-    width: 150px;
+    padding: 5px;
 }
 
 .btn-selected {
     box-shadow: 0 0 2px #00000060;
+}
+
+.btn-grid {
+    display: grid;
+}
+
+@media only screen and (max-width: 576px) {
+    .btn-grid {
+        grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
+    }
+}
+
+@media only screen and (min-width: 576px) {
+    .btn-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
 }
 </style>

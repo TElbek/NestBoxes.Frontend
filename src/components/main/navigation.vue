@@ -17,11 +17,6 @@
         route.meta.short }}</router-link>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <search></search>
-        </li>
-      </ul>
     </div>
   </nav>
 </template>
@@ -29,7 +24,6 @@
 <script setup>
 import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import search from '@/components/main/search.vue';
 
 const router = useRouter();
 
