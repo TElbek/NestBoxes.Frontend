@@ -4,15 +4,15 @@ import { defineStore } from 'pinia'
 export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
 
     const filterForLatter = ref(false);
-    const filterString = ref('');
+    const filterZone = ref(null);
     
     function toggleFilterForLatter(value) {
         filterForLatter.value = !filterForLatter.value;
     }
 
-    function setFilterString(value) {
-        filterString = value;
+    function setFilterZone(zone) {
+        filterZone.value = zone;
     }
   
-    return { toggleFilterForLatter, setFilterString, filterForLatter, filterString };
+    return { toggleFilterForLatter, filterForLatter, setFilterZone, filterZone };
 });

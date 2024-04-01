@@ -62,6 +62,6 @@ onMounted(() => {
 }
 
 .h6 {
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.3rem;
 }
 </style>

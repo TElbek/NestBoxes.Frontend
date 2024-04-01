@@ -51,7 +51,7 @@ function getNestBoxes() {
 };
 
 function getSortedByFid(list) {
-    return list.sort((a, b) => parseInt(a.fid) - parseInt(b.fid));
+    return list.sort((a, b) => parseInt(a.boxId) - parseInt(b.boxId));
 }
 
 function getNestBoxFiltered(list) {
@@ -59,6 +59,10 @@ function getNestBoxFiltered(list) {
 
     if (nestBoxFilter.filterForLatter) {
         result = list.filter((item) => item.altitude == 2);
+    }
+
+    if (nestBoxFilter.filterZone != null) {
+        result = result.filter((item) => item.zone == nestBoxFilter.filterZone);
     }
 
     return getSortedByFid(result);

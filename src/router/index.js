@@ -15,11 +15,11 @@ const router = createRouter({
       meta: {showInNavBar: false, title: 'Opret Registrering', short:''},
       component: () => import('../components/record/addRecord.vue')
     },
-    {
-      path: '/login',
-      name: 'login',
-      meta: {showInNavBar: true, title: 'Login', short:'Login'}
-    }
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   meta: {showInNavBar: true, title: 'Login', short:'Login'}
+    // }
   ]
 })
 
