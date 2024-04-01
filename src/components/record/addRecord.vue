@@ -68,9 +68,7 @@ const state = reactive({
 });
 
 const canDoSave = computed(() => {
-    return state.record.status.statusName != null &&
-           state.record.nesting.species != null && 
-           state.record.nesting.species.length > 0;
+    return state.record.status.statusName != null;
 });
 
 function getEmptyRecord() {

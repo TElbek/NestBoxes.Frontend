@@ -34,4 +34,8 @@ a {
     text-decoration: none;
     color: black;
 }
+
+.h6 {
+    margin-bottom: 0.2rem;
+}
 </style>

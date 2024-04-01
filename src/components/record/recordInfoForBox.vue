@@ -1,7 +1,8 @@
 <template>
     <slot class="mr-1"></slot>
     <div v-if="state.hasRecord">
-        <span class="h6">{{ state.recordInfo.nesting.species }}</span>
+        <div v-if="hasSpecies" class="h6">{{  state.recordInfo.nesting.species}}</div>
+        <div v-else>&nbsp;</div>
         <div class="fs-small text-nowrap">
             <span>{{ formatDate(state.recordInfo.datetime) }}&nbsp;-&nbsp;</span>
             <span v-if="state.recordInfo.nesting.eggs != null">&nbsp;{{ state.recordInfo.nesting.eggs }}</span>
@@ -16,11 +17,16 @@
 
 <script setup>
 import api from '@/api';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, computed } from 'vue';
 
 const state = reactive({
     recordInfo: {},
     hasRecord: false
+});
+
+const hasSpecies = computed(() =>{
+    return state.recordInfo.nesting.species != null && 
+           state.recordInfo.nesting.species.length > 0;
 });
 
 const props = defineProps({
@@ -53,5 +59,9 @@ onMounted(() => {
 <style scoped>
 .fs-small {
     font-size: 0.8rem;
+}
+
+.h6 {
+    margin-bottom: 0.1rem;
 }
 </style>

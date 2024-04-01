@@ -1,15 +1,15 @@
 <template>
     <ul class="nav nav-pills" role="tablist" v-if="state.hasData">
         <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[tabSelected.index == 0 ? 'border border-2' : '']"
+            <button class="nav-link" :class="[tabSelected.index == 0 ? 'btn-selected' : '']"
                 @click="setActiveTab(0)">Tjekkes ({{ state.nestBoxList.boxesForChecking.length }})</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[tabSelected.index == 1 ? 'border border-2' : '']"
+            <button class="nav-link" :class="[tabSelected.index == 1 ? 'btn-selected' : '']"
                 @click="setActiveTab(1)">OK ({{ state.nestBoxList.boxesChecked.length }})</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" :class="[tabSelected.index == 2 ? 'border border-2' : '']"
+            <button class="nav-link" :class="[tabSelected.index == 2 ? 'btn-selected' : '']"
                 @click="setActiveTab(2)">Ukendt ({{ state.nestBoxList.boxesNotChecked.length }})</button>
         </li>
     </ul>
@@ -62,5 +62,13 @@ function getSortedByFid(list) {
 <style scoped>
 .nav-link {
     color: black;
+}
+
+button {
+    width: 150px;
+}
+
+.btn-selected {
+    box-shadow: 0 0 2px #00000060;
 }
 </style>
