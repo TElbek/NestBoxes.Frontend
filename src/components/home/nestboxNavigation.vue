@@ -7,11 +7,11 @@
             :class="[nestBoxFilter.filterZone != null ? 'btn-primary' : 'btn-outline-secondary']">
             Zone {{ nestBoxFilter.filterZone }}
         </button>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" style="overflow-y: scroll; max-height: 300px;">
             <li><a class="dropdown-item" @click="setZoneFilter(null)">Alle</a></li>
-            <li><a class="dropdown-item" @click="setZoneFilter(4)">4</a></li>
-            <li><a class="dropdown-item" @click="setZoneFilter(7)">7</a></li>
-            <li><a class="dropdown-item" @click="setZoneFilter(18)">18</a></li>
+            <template v-for="zone in state.zoneList">
+                <li><a class="dropdown-item" @click="setZoneFilter(zone.zoneId)">{{zone.zoneId}}</a></li>                
+            </template>
         </ul>
 
         <button class="btn btn-sm" :class="[tabSelected.index == 0 ? 'btn-secondary' : 'btn-outline-secondary']"
@@ -25,11 +25,11 @@
             @click="setActiveTab(2)">Ukendt
             ({{ boxesNotCheckedCount }})</button>
     </div>
-    <!-- <h1>{{ nestBoxFilter.filterZone }}</h1> -->
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import api from '@/api';
+import { onMounted, reactive } from 'vue';
 import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import { useNestboxFilterStore } from '@/stores/nestboxfilter.js'
 
@@ -40,11 +40,14 @@ const props = defineProps({
     boxesForCheckingCount: 0,
     boxesCheckedCount: 0,
     boxesNotCheckedCount: 0,
-    uniqueZoneList: []
 });
 
 const state = reactive({
-    searchValue: ''
+    zoneList: []
+});
+
+onMounted(() => {
+    getZoneList();
 });
 
 function setActiveTab(tabIndex) {
@@ -58,6 +61,13 @@ function setFilterForLatter() {
 function setZoneFilter(zone) {
     nestBoxFilter.setFilterZone(zone);
 }
+
+function getZoneList() {
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/zones')
+        .then(res => {
+            state.zoneList = res.data.sort((a, b) => parseInt(a.zoneId.replace(/\D/g, '')) -  parseInt(b.zoneId.replace(/\D/g, '')));
+        })
+}
 </script>
 
 <style scoped>
@@ -69,5 +79,9 @@ function setZoneFilter(zone) {
 .dropdown-toggle {
     --bs-btn-border-radius: var(--bs-border-radius-sm) 0 0 var(--bs-border-radius-sm);
     border-width: var(--bs-border-width) var(--bs-border-width) var(--bs-border-width) 0;
+}
+
+.dropdown-item {
+    padding: 0px var(--bs-dropdown-item-padding-x);    
 }
 </style>
