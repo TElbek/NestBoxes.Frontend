@@ -7,7 +7,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       meta: {showInNavBar: true, title: 'Redekasser', short:'Redekasser'},
-      component: () => import('../components/home/home.vue')
+      component: () => import('../components/home/nestboxOverview.vue')
     },
     {
       path: '/addRecord/:fid',
