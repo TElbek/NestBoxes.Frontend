@@ -80,8 +80,4 @@ function getZoneList() {
     --bs-btn-border-radius: var(--bs-border-radius-sm) 0 0 var(--bs-border-radius-sm);
     border-width: var(--bs-border-width) var(--bs-border-width) var(--bs-border-width) 0;
 }
-
-.dropdown-item {
-    padding: 0px var(--bs-dropdown-item-padding-x);    
-}
 </style>
