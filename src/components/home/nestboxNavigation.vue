@@ -1,13 +1,13 @@
 <template>
     <ul class="nav nav-pills" id="myTab" role="tablist">
-        <li class="nav-item px-1 d-none d-lg-block" role="presentation" v-for="status in state.statusses">
+        <li class="nav-item px-1 d-none d-md-block" role="presentation" v-for="status in state.statusses">
             <button class="nav-link" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
                 role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
                 :class="[status.tab == 0 ? 'active' : '']">{{ status.caption }} ({{
             countForTab(status.tab) }})</button>
         </li>
 
-        <li class="nav-item dropdown px-0 d-lg-none">
+        <li class="nav-item dropdown px-0 d-md-none">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
                 {{ selectedCaption }}: {{ countForTab(tabSelected.index.value) }}
             </a>
