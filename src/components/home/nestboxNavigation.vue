@@ -3,13 +3,14 @@
         <li class="nav-item px-1 d-none d-md-block" role="presentation" v-for="status in state.statusses">
             <button class="nav-link" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
                 role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
-                :class="[status.tab == 0 ? 'active' : '']">{{ status.caption }} ({{
+                :class="[status.tab == tabSelected.index ? 'active' : '']">{{ status.caption }} ({{
             countForTab(status.tab) }})</button>
         </li>
 
         <li class="nav-item dropdown px-0 d-md-none">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                {{ selectedCaption }}: {{ countForTab(tabSelected.index.value) }}
+            <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                aria-expanded="false">
+                {{ selectedCaption }}: {{ countForTab(tabSelected.index) }}
             </a>
             <ul class="dropdown-menu">
                 <li v-for="status in state.statusses" class="dropdown-item" @click="setActiveTab(status.tab)">{{
@@ -66,10 +67,6 @@ onMounted(() => {
 
 const selectedCaption = computed(() => {
     return state.statusses[tabSelected.index].caption;
-});
-
-const selectedCount = computed(() => {
-    return countForTab(tabSelected.index.value);
 });
 
 function countForTab(tab) {
