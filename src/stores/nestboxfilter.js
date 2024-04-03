@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
@@ -13,6 +13,8 @@ export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
     function setFilterZone(zone) {
         filterZone.value = zone;
     }
+
+    const hasZoneValue = computed(() => filterZone.value != null)
   
-    return { toggleFilterForLatter, filterForLatter, setFilterZone, filterZone };
+    return { toggleFilterForLatter, filterForLatter, setFilterZone, filterZone, hasZoneValue };
 });

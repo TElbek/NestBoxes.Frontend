@@ -1,7 +1,7 @@
 <template>
     <div v-if="state.hasData">
         <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
-            :boxesNotCheckedCount="boxesNotCheckedCount"></navigation>
+            :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
         <div>
             <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
             </loopNestBox>

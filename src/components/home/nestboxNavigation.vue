@@ -1,30 +1,37 @@
 <template>
-    <div class="mb-3 btn-group btn-group-sm" role="group">
-        <button class="btn btn-sm" :class="[nestBoxFilter.filterForLatter ? 'btn-primary' : 'btn-outline-secondary']"
-            @click="setFilterForLatter">Stige</button>
+    <ul class="nav nav-pills" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="flex-sm-fill text-sm-center nav-link active" id="check-tab" data-bs-toggle="tab"
+                data-bs-target="#check" type="button" role="tab" aria-controls="check" aria-selected="true"
+                @click="setActiveTab(0)">Tjekkes ({{ boxesForCheckingCount }})</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="flex-sm-fill text-sm-center nav-link" id="ok-tab" data-bs-toggle="tab"
+                data-bs-target="#ok" type="button" role="tab" aria-controls="ok" aria-selected="false"
+                @click="setActiveTab(1)">OK ({{ boxesCheckedCount }})</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="unknown-tab" data-bs-toggle="tab" data-bs-target="#unknown" type="button"
+                role="tab" aria-controls="unknown" aria-selected="false" @click="setActiveTab(2)">Ukendt ({{ boxesNotCheckedCount }})</button>
+        </li>
 
-        <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-            :class="[nestBoxFilter.filterZone != null ? 'btn-primary' : 'btn-outline-secondary']">
-            Zone {{ nestBoxFilter.filterZone }}
-        </button>
-        <ul class="dropdown-menu" style="overflow-y: scroll; max-height: 300px;">
-            <li><a class="dropdown-item" @click="setZoneFilter(null)">Alle</a></li>
-            <template v-for="zone in state.zoneList">
-                <li><a class="dropdown-item" @click="setZoneFilter(zone.zoneId)">{{zone.zoneId}}</a></li>                
-            </template>
-        </ul>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" type="button"
+                :class="[nestBoxFilter.filterForLatter ? 'border border-success' : '']"
+                role="tab" aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()">Stige</button>
+        </li>
 
-        <button class="btn btn-sm" :class="[tabSelected.index == 0 ? 'btn-secondary' : 'btn-outline-secondary']"
-            @click="setActiveTab(0)">Tjekkes ({{ boxesForCheckingCount }})</button>
-
-        <button class="btn btn-sm" :class="[tabSelected.index == 1 ? 'btn-secondary' : 'btn-outline-secondary']"
-            @click="setActiveTab(1)">OK
-            ({{ boxesCheckedCount }})</button>
-
-        <button class="btn btn-sm" :class="[tabSelected.index == 2 ? 'btn-secondary' : 'btn-outline-secondary']"
-            @click="setActiveTab(2)">Ukendt
-            ({{ boxesNotCheckedCount }})</button>
-    </div>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                aria-expanded="false" :class="[nestBoxFilter.hasZoneValue ? 'border border-success' : '']">Zone {{ nestBoxFilter.filterZone }}</a>
+            <ul class="dropdown-menu" style="max-height:300px; overflow-y: auto;">
+                <li><a class="dropdown-item" @click="setZoneFilter(null)">Alle</a></li>
+                <li v-for="zone in state.zoneList">
+                    <a class="dropdown-item" @click="setZoneFilter(zone.zoneId)">{{ zone.zoneId }}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </template>
 
 <script setup>
@@ -65,19 +72,13 @@ function setZoneFilter(zone) {
 function getZoneList() {
     api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/zones')
         .then(res => {
-            state.zoneList = res.data.sort((a, b) => parseInt(a.zoneId.replace(/\D/g, '')) -  parseInt(b.zoneId.replace(/\D/g, '')));
+            state.zoneList = res.data.sort((a, b) => parseInt(a.zoneId.replace(/\D/g, '')) - parseInt(b.zoneId.replace(/\D/g, '')));
         })
 }
 </script>
 
 <style scoped>
-.btn-outline-secondary:hover {
-    background-color: transparent;
-    color: black;
-}
-
-.dropdown-toggle {
-    --bs-btn-border-radius: var(--bs-border-radius-sm) 0 0 var(--bs-border-radius-sm);
-    border-width: var(--bs-border-width) var(--bs-border-width) var(--bs-border-width) 0;
-}
+    button {
+        width: 150px;
+    }
 </style>
