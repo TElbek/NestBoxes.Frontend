@@ -1,20 +1,10 @@
 <template>
     <ul class="nav nav-pills" id="myTab" role="tablist">
-        <li class="nav-item px-1 d-none d-lg-block" role="presentation">
-            <button class="nav-link active" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
-                role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(0)">Tjekkes ({{
-                    boxesForCheckingCount }})</button>
-        </li>
-        <li class="nav-item px-1  d-none d-lg-block" role="presentation">
-            <button class="nav-link" id="ok-tab" data-bs-toggle="tab" data-bs-target="#ok"
-                type="button" role="tab" aria-controls="ok" aria-selected="false" @click="setActiveTab(1)">OK ({{
-                    boxesCheckedCount }})</button>
-        </li>
-        <li class="nav-item px-1 d-none d-lg-block" role="presentation">
-            <button class="nav-link" id="unknown-tab" data-bs-toggle="tab" data-bs-target="#unknown"
-                type="button" role="tab" aria-controls="unknown" aria-selected="false" @click="setActiveTab(2)">Ukendt
-                ({{
-                    boxesNotCheckedCount }})</button>
+        <li class="nav-item px-1 d-none d-lg-block" role="presentation" v-for="status in state.statusses">
+            <button class="nav-link" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
+                role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
+                :class="[status.tab == 0 ? 'active' : '']">{{ status.caption }} ({{
+            countForTab(status.tab) }})</button>
         </li>
 
         <li class="nav-item dropdown px-0 d-lg-none">
@@ -23,7 +13,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li v-for="status in state.statusses" class="dropdown-item" @click="setActiveTab(status.tab)">{{
-                     countForTab(status.tab) }}: {{ status.caption }}</li>
+            countForTab(status.tab) }}: {{ status.caption }}</li>
             </ul>
         </li>
 
@@ -112,6 +102,7 @@ function getZoneList() {
 
 <style scoped>
 .nav-pills .nav-link {
+    width: 110px;
     padding: 5px;
     color: #000000;
     border: 1px solid #ffffff;
