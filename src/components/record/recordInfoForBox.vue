@@ -57,10 +57,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.fs-small {
-    font-size: 0.8rem;
-}
-
 .h6 {
     margin-bottom: 0.3rem;
 }

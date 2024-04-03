@@ -39,6 +39,12 @@ body {
   }
 }
 
+/* @media only screen and (max-width: 1200px) {
+    body {
+        font-size: 0.8rem;
+    }
+} */
+
 hr {
   border: none;
   height: 1px;
