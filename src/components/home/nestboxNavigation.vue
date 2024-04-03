@@ -5,31 +5,26 @@
                 role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(0)">Tjekkes ({{
                     boxesForCheckingCount }})</button>
         </li>
-        <li class="nav-item px-1" role="presentation">
-            <button class="nav-link d-none d-lg-block" id="ok-tab" data-bs-toggle="tab" data-bs-target="#ok"
+        <li class="nav-item px-1  d-none d-lg-block" role="presentation">
+            <button class="nav-link" id="ok-tab" data-bs-toggle="tab" data-bs-target="#ok"
                 type="button" role="tab" aria-controls="ok" aria-selected="false" @click="setActiveTab(1)">OK ({{
                     boxesCheckedCount }})</button>
         </li>
-        <li class="nav-item px-1" role="presentation">
-            <button class="nav-link d-none d-lg-block" id="unknown-tab" data-bs-toggle="tab" data-bs-target="#unknown"
+        <li class="nav-item px-1 d-none d-lg-block" role="presentation">
+            <button class="nav-link" id="unknown-tab" data-bs-toggle="tab" data-bs-target="#unknown"
                 type="button" role="tab" aria-controls="unknown" aria-selected="false" @click="setActiveTab(2)">Ukendt
                 ({{
                     boxesNotCheckedCount }})</button>
         </li>
 
-        <li class="nav-item dropdown px-1 d-lg-none">
+        <li class="nav-item dropdown px-0 d-lg-none">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                {{ selectedCaption }}
+                {{ selectedCaption }}: {{ countForTab(tabSelected.index.value) }}
             </a>
             <ul class="dropdown-menu">
-                <li v-for="status in statusses" class="dropdown-item" @click="setActiveTab(status.tab)">{{
-                    status.caption }} ({{ status.count }})</li>
+                <li v-for="status in state.statusses" class="dropdown-item" @click="setActiveTab(status.tab)">{{
+                     countForTab(status.tab) }}: {{ status.caption }}</li>
             </ul>
-        </li>
-
-        <li class="nav-item px-1" role="presentation">
-            <button class="nav-link" type="button" :class="[nestBoxFilter.filterForLatter ? 'active' : '']" role="tab"
-                aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()">Stige</button>
         </li>
 
         <li class="nav-item dropdown px-1">
@@ -42,6 +37,11 @@
                     <a class="dropdown-item" @click="setZoneFilter(zone.zoneId)">{{ zone.zoneId }}</a>
                 </li>
             </ul>
+        </li>
+
+        <li class="nav-item px-1" role="presentation">
+            <button class="nav-link" type="button" :class="[nestBoxFilter.filterForLatter ? 'active' : '']" role="tab"
+                aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()">Stige</button>
         </li>
     </ul>
 </template>
@@ -61,14 +61,13 @@ const props = defineProps({
     boxesNotCheckedCount: 0,
 });
 
-const statusses = [
-    { caption: 'Tjekkes', tab: 0, count: props.boxesForCheckingCount },
-    { caption: 'OK', tab: 1, count: props.boxesCheckedCount },
-    { caption: 'Ukendt', tab: 2, count: props.boxesNotCheckedCount },
-]
-
 const state = reactive({
-    zoneList: []
+    zoneList: [],
+    statusses: [
+        { caption: 'Tjekkes', tab: 0 },
+        { caption: 'OK', tab: 1 },
+        { caption: 'Ukendt', tab: 2 }
+    ]
 });
 
 onMounted(() => {
@@ -76,8 +75,20 @@ onMounted(() => {
 });
 
 const selectedCaption = computed(() => {
-    return statusses[tabSelected.index].caption + ': ' + statusses[tabSelected.index].count;
+    return state.statusses[tabSelected.index].caption;
 });
+
+const selectedCount = computed(() => {
+    return countForTab(tabSelected.index.value);
+});
+
+function countForTab(tab) {
+    switch (tab) {
+        case 0: return props.boxesForCheckingCount;
+        case 1: return props.boxesCheckedCount;
+        case 2: return props.boxesNotCheckedCount;
+    }
+}
 
 function setActiveTab(tabIndex) {
     tabSelected.set(tabIndex);
