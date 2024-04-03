@@ -18,22 +18,20 @@
             </ul>
         </li>
 
-        <li class="nav-item dropdown px-1">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"
-                :class="[nestBoxFilter.hasZoneValue ? 'active' : '']">Zone {{ nestBoxFilter.filterZone
-                }}</a>
-            <ul class="dropdown-menu" style="max-height:300px; overflow-y: auto;">
-                <li><a class="dropdown-item" @click="setZoneFilter(null)">Alle</a></li>
-                <li v-for="zone in state.zoneList">
-                    <a class="dropdown-item" @click="setZoneFilter(zone.zoneId)">{{ zone.zoneId }}</a>
-                </li>
-            </ul>
-        </li>
-
         <li class="nav-item px-1" role="presentation">
             <button class="nav-link" type="button" :class="[nestBoxFilter.filterForLatter ? 'active' : '']" role="tab"
                 aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()">Stige</button>
         </li>
+
+        <li class="nav-item px-1">
+            <input type="search" class="form-control" placeholder="Zone" size="5" @input="setZoneFilter()"
+                v-model="state.zoneId" list="zone-values"/>
+
+            <datalist id="zone-values">
+                <option v-for="zone in state.zoneList">{{ zone.zoneId }}</option>
+            </datalist>
+        </li>
+
     </ul>
 </template>
 
@@ -50,6 +48,7 @@ const props = defineProps({
     boxesForCheckingCount: 0,
     boxesCheckedCount: 0,
     boxesNotCheckedCount: 0,
+    zoneId: 0
 });
 
 const state = reactive({
@@ -85,8 +84,8 @@ function setFilterForLatter() {
     nestBoxFilter.toggleFilterForLatter();
 };
 
-function setZoneFilter(zone) {
-    nestBoxFilter.setFilterZone(zone);
+function setZoneFilter() {
+    nestBoxFilter.setFilterZone(state.zoneId.length > 0 ? state.zoneId : null);
 }
 
 function getZoneList() {
@@ -107,6 +106,12 @@ function getZoneList() {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
+    color: #000000;
+    background-color: transparent;
+    border: 1px solid #0000ff70;
+}
+
+.zone-active {
     color: #000000;
     background-color: transparent;
     border: 1px solid #0000ff70;
