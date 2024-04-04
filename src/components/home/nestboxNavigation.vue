@@ -3,8 +3,8 @@
         <li class="nav-item px-1 d-none d-md-block" role="presentation" v-for="status in state.statusses">
             <button class="nav-link" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
                 role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
-                :class="[status.tab == tabSelected.index ? 'active' : '']">{{ status.caption }} ({{
-            countForTab(status.tab) }})</button>
+                :class="[status.tab == tabSelected.index ? 'active' : '']">{{ status.caption }}: {{
+            countForTab(status.tab) }}</button>
         </li>
 
         <li class="nav-item dropdown px-0 d-md-none">
@@ -48,7 +48,6 @@ const props = defineProps({
     boxesForCheckingCount: 0,
     boxesCheckedCount: 0,
     boxesNotCheckedCount: 0,
-    zoneId: 0
 });
 
 const state = reactive({
@@ -57,11 +56,13 @@ const state = reactive({
         { caption: 'Tjekkes', tab: 0 },
         { caption: 'OK', tab: 1 },
         { caption: 'Ukendt', tab: 2 }
-    ]
+    ],
+    zoneId: 0
 });
 
 onMounted(() => {
     getZoneList();
+    state.zoneId = nestBoxFilter.filterZone;
 });
 
 const selectedCaption = computed(() => {
@@ -101,19 +102,11 @@ function getZoneList() {
     width: 110px;
     padding: 5px;
     color: #000000;
-    border: 1px solid #ffffff;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #000000;
-    background-color: transparent;
-    border: 1px solid #0000ff70;
-}
-
-.zone-active {
-    color: #000000;
-    background-color: transparent;
-    border: 1px solid #0000ff70;
+    background-color: #cfcfcf60;
 }
 </style>
