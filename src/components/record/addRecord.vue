@@ -1,20 +1,24 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4" v-if="state.hasBox">
-            Kasse {{ state.nestBox.properties.boxId }}: {{formatDate(state.record.datetime) }}
+            Kasse {{ state.nestBox.properties.boxId }}: {{ formatDate(state.record.datetime) }}
         </div>
         <form>
             <div class="mb-3">
                 <label for="status-select" class="form-check-label">Status</label>
                 <select class="form-select" id="status-select" v-model="state.record.status" v-focus>
-                    <option v-for="(option, index) in state.statusList" :value="option">
+                    <option v-for="option in state.statusList" :value="option">
                         {{ option.statusName }}
                     </option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="species-input" class="form-check-label">Art</label>
-                <input class="form-control" type="text" id="species-input" v-model="state.record.nesting.species" />
+                <select class="form-select" id="species-input" v-model="state.record.nesting.species">
+                    <option v-for="art in getSpeciesSortedByLocalName()">
+                        {{ art.localName }}
+                    </option>
+                </select>
             </div>
             <div class="row  mb-3">
                 <div class="col">
@@ -64,7 +68,8 @@ const state = reactive({
     hasBox: false,
     statusList: [],
     record: {},
-    nestBox: {}
+    nestBox: {},
+    speciesList: []
 });
 
 const canDoSave = computed(() => {
@@ -87,6 +92,13 @@ function getNestBox() {
         })
 }
 
+function getSpeciesList() {
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/species')
+        .then(res => {
+            state.speciesList = res.data;
+        })
+}
+
 function getStatusList() {
     api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/status')
         .then(res => {
@@ -99,6 +111,10 @@ function save() {
         .then(res => { router.go(-1); });
 }
 
+function getSpeciesSortedByLocalName() {
+    return state.speciesList.sort((a, b) => a.localName.localeCompare(b.localName));
+}
+
 function cancel() {
     router.go(-1);
 }
@@ -107,6 +123,7 @@ onMounted(() => {
     getNestBox();
     getEmptyRecord();
     getStatusList();
+    getSpeciesList();
 });
 
 function formatDate(date) {
