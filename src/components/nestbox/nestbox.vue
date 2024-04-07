@@ -4,11 +4,17 @@
             <router-link :to="`/addRecord/${nestbox.fid}`">
                 <record-info :fid="nestbox.fid" v-if="!showBrief">
                     <nestbox-altitute-zone :nestbox="nestbox"></nestbox-altitute-zone>
-                    <div class="h6">{{ nestbox.boxId }}</div>
+                    <div class="h6 fw-bold">
+                        <span>{{ nestbox.boxId }}</span>
+                        <span>&nbsp;{{ nestbox.orientation }}</span>
+                    </div>            
                 </record-info>
                 <div v-else>
                     <nestbox-altitute-zone :nestbox="nestbox"></nestbox-altitute-zone>
-                    <div class="h6">{{ nestbox.boxId }}</div>
+                    <div class="h6 fw-bold">
+                        <span>{{ nestbox.boxId }}</span>
+                        <span>&nbsp;{{ nestbox.orientation }}</span>
+                    </div>            
                 </div>
             </router-link>
         </div>

@@ -2,8 +2,6 @@
 import { reactive } from 'vue';
 import { RouterView } from 'vue-router'
 import navigation from '@/components/main/navigation.vue'
-import { useRoute } from 'vue-router'
-const route = useRoute();
 
 const state = reactive({
     title: ''
@@ -38,12 +36,6 @@ body {
     margin: auto;
   }
 }
-
-/* @media only screen and (max-width: 1200px) {
-    body {
-        font-size: 0.8rem;
-    }
-} */
 
 hr {
   border: none;

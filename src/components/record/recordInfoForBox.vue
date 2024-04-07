@@ -1,7 +1,7 @@
 <template>
     <slot class="mr-1"></slot>
     <div v-if="state.hasRecord">
-        <div v-if="hasSpecies" class="h6">{{  state.recordInfo.nesting.species}}</div>
+        <div v-if="hasSpecies" class="h6 fw-normal">{{  state.recordInfo.nesting.species}}</div>
         <div v-else>&nbsp;</div>
         <div class="fs-small text-nowrap">
             <span>{{ formatDate(state.recordInfo.datetime) }}&nbsp;-&nbsp;</span>
@@ -58,6 +58,6 @@ onMounted(() => {
 
 <style scoped>
 .h6 {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.1rem;
 }
 </style>
