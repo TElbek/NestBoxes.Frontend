@@ -1,5 +1,5 @@
 <template>
-    <div class="card p-2 shadow-sm">
+    <div class="card p-2 shadow-sm" :class="[!props.showBrief ? 'card-height' : '']">
         <div class="card-body">
             <router-link :to="`/addRecord/${nestbox.fid}`">
                 <record-info :fid="nestbox.fid" v-if="!showBrief">
@@ -43,5 +43,9 @@ a {
 
 .h6 {
     margin-bottom: 0.2rem;
+}
+
+.card-height {
+    height: 85px;
 }
 </style>
