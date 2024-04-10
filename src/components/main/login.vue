@@ -2,7 +2,7 @@
     <div class="center-container">
         <form @submit.prevent="login" method="post">
             <div>
-                <input type="text" placeholder="brugernavn" name="uname" required v-model="state.username" ref="username"/>
+                <input type="text" placeholder="brugernavn" name="uname" required v-model="state.username" ref="username" v-focus/>
                 <input type="password" placeholder="kodeord" name="pwd" required v-model="state.password" ref="pwd"/>
                 <button type="submit">Login</button>
             </div>
