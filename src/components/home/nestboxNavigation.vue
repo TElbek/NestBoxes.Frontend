@@ -4,7 +4,7 @@
             <button class="nav-link" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
                 role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
                 :class="[status.tab == tabSelected.index ? 'active' : '']">{{ status.caption }}: {{
-            countForTab(status.tab) }}</button>
+                    countForTab(status.tab) }}</button>
         </li>
 
         <li class="nav-item dropdown px-0 d-md-none">
@@ -14,24 +14,33 @@
             </a>
             <ul class="dropdown-menu">
                 <li v-for="status in state.statusses" class="dropdown-item" @click="setActiveTab(status.tab)">{{
-            countForTab(status.tab) }}: {{ status.caption }}</li>
+                    countForTab(status.tab) }}: {{ status.caption }}</li>
             </ul>
         </li>
 
         <li class="nav-item px-1" role="presentation">
             <button class="nav-link" type="button" :class="[nestBoxFilter.filterForLatter ? 'active' : '']" role="tab"
-                aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()">Stige</button>
+                aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()" style="width:60px">Stige</button>
         </li>
 
         <li class="nav-item px-1">
-            <input type="search" class="form-control" placeholder="Zone" size="5" @input="setZoneFilter()"
-                v-model="state.zoneId" list="zone-values"/>
+            <input type="search" class="form-control" placeholder="Zone" size="3" @input="setZoneFilter()"
+                v-model="state.zoneId" list="zone-values" />
 
             <datalist id="zone-values">
                 <option v-for="zone in state.zoneList">{{ zone.zoneId }}</option>
             </datalist>
         </li>
 
+        <div class="dropdown">
+            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ daysAheadCaption }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" v-for="days in state.daysAheadList" @click="setDaysAhead(days)">{{days}}</a></li>
+            </ul>
+        </div>
     </ul>
 </template>
 
@@ -52,6 +61,7 @@ const props = defineProps({
 
 const state = reactive({
     zoneList: [],
+    daysAheadList: [1, 2, 3, 5, 8, 13, 21, 34],
     statusses: [
         { caption: 'Tjekkes', tab: 0 },
         { caption: 'OK', tab: 1 },
@@ -67,6 +77,10 @@ onMounted(() => {
 
 const selectedCaption = computed(() => {
     return state.statusses[tabSelected.index].caption;
+});
+
+const daysAheadCaption = computed(() => {
+    return nestBoxFilter.daysAhead + ' ' + (nestBoxFilter.daysAhead > 1 ? 'Dage' : 'Dag');
 });
 
 function countForTab(tab) {
@@ -94,6 +108,10 @@ function getZoneList() {
         .then(res => {
             state.zoneList = res.data.sort((a, b) => parseInt(a.zoneId.replace(/\D/g, '')) - parseInt(b.zoneId.replace(/\D/g, '')));
         })
+}
+
+function setDaysAhead(value) {
+    nestBoxFilter.daysAhead = value;
 }
 </script>
 

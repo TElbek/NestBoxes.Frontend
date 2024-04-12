@@ -5,7 +5,8 @@ export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
 
     const filterForLatter = ref(false);
     const filterZone = ref(null);
-    
+    const daysAhead = ref(1);
+
     function toggleFilterForLatter(value) {
         filterForLatter.value = !filterForLatter.value;
     }
@@ -14,7 +15,11 @@ export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
         filterZone.value = zone;
     }
 
+    function setDaysAhead(value) {
+        daysAhead = value;
+    }
+
     const hasZoneValue = computed(() => filterZone.value != null)
   
-    return { toggleFilterForLatter, filterForLatter, setFilterZone, filterZone, hasZoneValue };
+    return { toggleFilterForLatter, filterForLatter, setFilterZone, filterZone, hasZoneValue, daysAhead, setDaysAhead };
 });

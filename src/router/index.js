@@ -13,7 +13,7 @@ const router = createRouter({
     {
       path: '/addRecord/:fid',
       name: 'addRecord',
-      meta: { showInNavBar: false, title: 'Opret Registrering', short: '', requiresAuth: true },
+      meta: { showInNavBar: false, title: 'Opret Registrering', short: '', requiresAuth: false },
       component: () => import('../components/record/addRecord.vue')
     },
     {

@@ -2,7 +2,7 @@
     <div v-if="state.hasData">
         <div>
             <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
-            :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
+                :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
         </div>
         <div>
             <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
@@ -17,6 +17,7 @@
 
 <script setup>
 import api from '@/api';
+import { storeToRefs } from 'pinia'
 import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import navigation from '@/components/home/nestboxNavigation.vue';
 import loopNestBox from '@/components/nestbox/loopNestBox.vue';
@@ -25,7 +26,9 @@ import { useNestboxFilterStore } from '@/stores/nestboxfilter.js'
 const tabSelected = useTabSelectedStore()
 const nestBoxFilter = useNestboxFilterStore();
 
-import { onMounted, reactive, computed } from 'vue';
+const { daysAhead } = storeToRefs(nestBoxFilter)
+
+import { onMounted, reactive, computed, watch } from 'vue';
 
 const state = reactive({
     nestBoxList: {},
@@ -45,7 +48,7 @@ onMounted(() => {
 });
 
 function getNestBoxes() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=' + import.meta.env.VITE_VUE_CHECKME_DAYSAHEAD)
+    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=' + nestBoxFilter.daysAhead)
         .then(res => {
             state.nestBoxList = res.data;;
             state.hasData = true;
@@ -69,4 +72,10 @@ function getNestBoxFiltered(list) {
 
     return getSortedByFid(result);
 }
+
+watch(daysAhead, async (newDaysAhead, oldDaysAhead) => {
+    if (newDaysAhead != oldDaysAhead) {
+        getNestBoxes();
+    }
+}); 
 </script>

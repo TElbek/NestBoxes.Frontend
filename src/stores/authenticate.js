@@ -5,5 +5,9 @@ export const useAuthenticateStore = defineStore('authenticate', () => {
 
     const isLoggedIn = ref(false);
     
-    return { isLoggedIn };
+    function setIsLoggedIn() {
+        isLoggedIn.value = true;
+    }
+
+    return { isLoggedIn, setIsLoggedIn };
 });

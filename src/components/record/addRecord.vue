@@ -108,7 +108,7 @@ function getStatusList() {
 
 function save() {
     api.post(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/record/add', state.record)
-        .then(res => { router.go(-1); });
+        .then(res => { router.replace("/"); });
 }
 
 function getSpeciesSortedByLocalName() {
@@ -116,7 +116,7 @@ function getSpeciesSortedByLocalName() {
 }
 
 function cancel() {
-    router.go(-1);
+    router.replace("/");
 }
 
 onMounted(() => {

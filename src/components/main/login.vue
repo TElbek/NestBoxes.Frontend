@@ -1,6 +1,6 @@
 <template>
     <div class="center-container">
-        <form class="border rounded shadow-sm">
+        <form class="border rounded shadow-sm" @submit.prevent="login">
             <div class="mb-3">
                 <input type="text" class="form-control" placeholder="Brugernavn" name="uname" v-model="state.username"
                     ref="username" v-focus />
@@ -10,7 +10,7 @@
                     ref="pwd" />
             </div>
             <div class="btn-grid mb-3">
-                <button class="btn btn-sm btn-success" :disabled="!canLogin" @click="login">Login</button>
+                <button type="submit" class="btn btn-sm btn-success" :disabled="!canLogin">Login</button>
                 <button class="btn btn-sm btn-dark" @click="goBack">Fortryd</button>
             </div>
         </form>
@@ -19,6 +19,13 @@
 
 <script setup>
 import { reactive, computed } from 'vue';
+import { useAuthenticateStore } from '@/stores/authenticate.js';
+import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
+
+const authenticate = useAuthenticateStore();
+const router = useRouter();
+const route = useRoute();
 
 const state = reactive({
     username: '',
@@ -26,15 +33,16 @@ const state = reactive({
 });
 
 const canLogin = computed(() => {
-    return state.username.length > 0 &&
-        state.password.length > 0;
+    return state.username.length > 0 &&state.password.length > 0;
 });
 
 function login() {
-
+    authenticate.setIsLoggedIn();
+    router.push(route.query.redirect);
 }
 
 function goBack() {
+    router.replace("/");
 }
 </script>
 
