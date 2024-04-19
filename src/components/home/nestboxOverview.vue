@@ -48,7 +48,7 @@ onMounted(() => {
 });
 
 function getNestBoxes() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/checkme?before=' + nestBoxFilter.daysAhead)
+    api.get('nestbox/checkme?before=' + nestBoxFilter.daysAhead)
         .then(res => {
             state.nestBoxList = res.data;;
             state.hasData = true;

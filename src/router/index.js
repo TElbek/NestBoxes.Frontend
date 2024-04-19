@@ -7,13 +7,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      meta: { showInNavBar: true, title: 'Redekasser', short: 'Redekasser', requiresAuth: false },
+      meta: { showInNavBar: true, title: 'Redekasser', short: 'Redekasser', requiresAuth: true },
       component: () => import('../components/home/nestboxOverview.vue')
     },
     {
       path: '/addRecord/:fid',
       name: 'addRecord',
-      meta: { showInNavBar: false, title: 'Opret Registrering', short: '', requiresAuth: false },
+      meta: { showInNavBar: false, title: 'Opret Registrering', short: '', requiresAuth: true },
       component: () => import('../components/record/addRecord.vue')
     },
     {

@@ -104,7 +104,7 @@ function setZoneFilter() {
 }
 
 function getZoneList() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/zones')
+    api.get('nestbox/zones')
         .then(res => {
             state.zoneList = res.data.sort((a, b) => parseInt(a.zoneId.replace(/\D/g, '')) - parseInt(b.zoneId.replace(/\D/g, '')));
         })

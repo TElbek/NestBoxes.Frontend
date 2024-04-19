@@ -77,7 +77,7 @@ const canDoSave = computed(() => {
 });
 
 function getEmptyRecord() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/record/' + route.params.fid + "/new")
+    api.get('nestbox/record/' + route.params.fid + "/new")
         .then(res => {
             state.record = res.data;
             state.hasData = true;
@@ -85,7 +85,7 @@ function getEmptyRecord() {
 }
 
 function getNestBox() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/feature/' + route.params.fid)
+    api.get('nestbox/feature/' + route.params.fid)
         .then(res => {
             state.nestBox = res.data;
             state.hasBox = true;
@@ -93,21 +93,21 @@ function getNestBox() {
 }
 
 function getSpeciesList() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/species')
+    api.get('nestbox/species')
         .then(res => {
             state.speciesList = res.data;
         })
 }
 
 function getStatusList() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/status')
+    api.get('nestbox/status')
         .then(res => {
             state.statusList = res.data;
         })
 }
 
 function save() {
-    api.post(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/record/add', state.record)
+    api.post('nestbox/record/add', state.record)
         .then(res => { router.replace("/"); });
 }
 

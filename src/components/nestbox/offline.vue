@@ -17,7 +17,7 @@ const offlineBtnClass = computed(() => {
 
 function setOffline() {
     api.post(
-        import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/takedown/' + 
+        'nestbox/takedown/' + 
         state.nestBox.properties.fid + '/' + !state.nestBox.properties.isOffline)
         .then(res => router.go(-1));
 }

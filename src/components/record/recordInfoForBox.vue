@@ -34,7 +34,7 @@ const props = defineProps({
 });
 
 function getRecordInfo() {
-    api.get(import.meta.env.VITE_VUE_API_BASE_URL + 'nestbox/record/' + props.fid + '/latest')
+    api.get('nestbox/record/' + props.fid + '/latest')
         .then(res => {
             if (res.data != "") {
                 state.recordInfo = res.data;
