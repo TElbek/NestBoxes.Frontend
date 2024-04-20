@@ -23,9 +23,9 @@ import { useAuthenticateStore } from '@/stores/authenticate.js';
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
 
-const authenticate = useAuthenticateStore();
 const router = useRouter();
 const route = useRoute();
+const authenticate = useAuthenticateStore();
 
 const state = reactive({
     username: '',
@@ -41,7 +41,8 @@ function login() {
     api.post('auth/login', auth)
         .then(function (response) {
             authenticate.setJwtToken(response.data.accessToken);
-            authenticate.setIsLoggedIn();
+        })
+        .finally(() => {
             router.replace(route.query.redirect);
         });
 }

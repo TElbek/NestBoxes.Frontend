@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useAuthenticateStore } from '@/stores/authenticate.js';
-const authenticate = useAuthenticateStore();
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_VUE_API_BASE_URL
 });
 
 api.interceptors.request.use((config) => {
-  if (authenticate.isLoggedIn) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${authenticate.jwtToken}`;
+  const authenticate = useAuthenticateStore();
+  if(authenticate.isLoggedIn) {
+    config.headers.Authorization = "Bearer " + authenticate.jwtToken;
   }
   return config;
 });
