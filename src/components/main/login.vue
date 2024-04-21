@@ -46,10 +46,6 @@ function login() {
             router.replace(route.query.redirect);
         });
 }
-
-function goBack() {
-    router.replace("/");
-}
 </script>
 
 <style scoped>
