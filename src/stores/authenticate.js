@@ -17,5 +17,5 @@ export const useAuthenticateStore = defineStore('authenticate', () => {
 },
     {
         persist: true,
-    },
+    }
 );

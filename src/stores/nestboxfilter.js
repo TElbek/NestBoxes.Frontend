@@ -22,4 +22,7 @@ export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
     const hasZoneValue = computed(() => filterZone.value != null)
   
     return { toggleFilterForLatter, filterForLatter, setFilterZone, filterZone, hasZoneValue, daysAhead, setDaysAhead };
+},
+{
+    persist: true,
 });

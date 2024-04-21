@@ -1,9 +1,13 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4" v-if="state.hasBox">
-            Kasse {{ state.nestBox.properties.boxId }}: {{ formatDate(state.record.datetime) }}
+            Kasse {{ state.nestBox.properties.boxId }}&nbsp;{{ state.nestBox.properties.orientation }} : {{ formatDate(state.record.datetime) }}
         </div>
         <form>
+            <!-- <div class="mb-3">
+                <label for="datepicker" class="form-check-label">Dato</label>
+                <input id="datepicker" type="date" v-model="state.record.datetime" class="form-control" lang="da-DK" v-focus />
+            </div> -->
             <div class="mb-3">
                 <label for="status-select" class="form-check-label">Status</label>
                 <select class="form-select" id="status-select" v-model="state.record.status" v-focus>

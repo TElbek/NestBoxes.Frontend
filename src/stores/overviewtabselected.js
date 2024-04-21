@@ -8,4 +8,7 @@ export const useTabSelectedStore = defineStore('tabIndex', () => {
   }
 
   return { index, set }
+},
+{
+    persist: true,
 })
