@@ -1,13 +1,16 @@
 <template>
     <slot class="mr-1"></slot>
     <div v-if="state.hasRecord">
-        <div v-if="hasSpecies" class="h6 fw-normal">{{  state.recordInfo.nesting.species}}</div>
+        <div v-if="hasSpecies" class="h6 fw-normal">{{ state.recordInfo.nesting.species }}</div>
         <div v-else>&nbsp;</div>
         <div class="fs-small text-nowrap">
-            <span>{{ formatDate(state.recordInfo.datetime) }}&nbsp;-&nbsp;</span>
-            <span v-if="state.recordInfo.nesting.eggs != null">&nbsp;{{ state.recordInfo.nesting.eggs }}</span>
-            <span v-if="state.recordInfo.nesting.chicks != null">&nbsp;{{ state.recordInfo.nesting.chicks }}</span>
-            <span>&nbsp;{{ state.recordInfo.status.statusName }}</span>
+            <span>{{ formatDate(state.recordInfo.datetime) }}</span>
+            <template v-if="hasValue(state.recordInfo.nesting.eggs) || hasValue(state.recordInfo.nesting.chicks)">
+                <span>&nbsp;-&nbsp;</span>
+                <span v-if="hasValue(state.recordInfo.nesting.eggs)">&nbsp;{{ state.recordInfo.nesting.eggs }} Æg</span>
+                <span v-if="hasValue(state.recordInfo.nesting.chicks)">&nbsp;{{ state.recordInfo.nesting.chicks}} Unger</span>
+            </template>
+            <span class="float-end fst-italic">&nbsp;{{ state.recordInfo.status.statusName }}</span>
         </div>
     </div>
     <div v-else>
@@ -24,14 +27,18 @@ const state = reactive({
     hasRecord: false
 });
 
-const hasSpecies = computed(() =>{
-    return state.recordInfo.nesting.species != null && 
-           state.recordInfo.nesting.species.length > 0;
+const hasSpecies = computed(() => {
+    return state.recordInfo.nesting.species != null &&
+        state.recordInfo.nesting.species.length > 0;
 });
 
 const props = defineProps({
     fid: Number
 });
+
+function hasValue(value) {
+    return value != null && value > 0;
+}
 
 function getRecordInfo() {
     api.get('nestbox/record/' + props.fid + '/latest')

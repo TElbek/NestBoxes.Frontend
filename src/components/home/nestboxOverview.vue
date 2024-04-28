@@ -50,7 +50,7 @@ onMounted(() => {
 function getNestBoxes() {
     api.get('nestbox/checkme?before=' + nestBoxFilter.daysAhead)
         .then(res => {
-            state.nestBoxList = res.data;;
+            state.nestBoxList = res.data;
             state.hasData = true;
         })
 };
@@ -64,10 +64,6 @@ function getNestBoxFiltered(list) {
 
     if (nestBoxFilter.filterForLatter) {
         result = list.filter((item) => item.altitude == 2);
-    }
-
-    if (nestBoxFilter.filterZone != null) {
-        result = result.filter((item) => item.zone == nestBoxFilter.filterZone);
     }
 
     return getSortedByFid(result);

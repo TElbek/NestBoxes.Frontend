@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import {onMounted, reactive, computed } from 'vue';
+import {computed } from 'vue';
    
 const offlineCaption = computed(() => {
     return state.nestBox.properties.isOffline ? "Montere" : "Nedtage";

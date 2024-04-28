@@ -21,6 +21,12 @@ const router = createRouter({
       name: 'login',
       meta: { showInNavBar: false, title: 'Login', short: 'Login', requiresAuth: false },
       component: () => import('../components/main/login.vue')
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      meta: { showInNavBar: true, title: 'Log ud', short: 'Log ud', requiresAuth: false },
+      component: () => import('../components/main/logout.vue')
     }
   ]
 })

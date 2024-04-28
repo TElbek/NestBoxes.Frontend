@@ -10,7 +10,7 @@
                     ref="pwd" />
             </div>
             <div class="mb-2">
-                <button type="submit" class="btn btn-sm btn-success" :disabled="!canLogin">Login</button>
+                <button type="submit" class="btn btn-sm btn-success" :disabled="!canLogin">Log ind</button>
             </div>
         </form>
     </div>

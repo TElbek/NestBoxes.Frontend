@@ -20,33 +20,25 @@
 
         <li class="nav-item px-1" role="presentation">
             <button class="nav-link" type="button" :class="[nestBoxFilter.filterForLatter ? 'active' : '']" role="tab"
-                aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()" style="width:60px">Stige</button>
-        </li>
-
-        <li class="nav-item px-1">
-            <input type="search" class="form-control" placeholder="Zone" size="3" @input="setZoneFilter()"
-                v-model="state.zoneId" list="zone-values" />
-
-            <datalist id="zone-values">
-                <option v-for="zone in state.zoneList">{{ zone.zoneId }}</option>
-            </datalist>
+                aria-controls="unknown" aria-selected="false" @click="setFilterForLatter()"
+                style="width:60px">Stige</button>
         </li>
 
         <div class="dropdown">
-            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="btn dropdown-toggle" href="#" role="button" id="daysAheadMenuLink" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 {{ daysAheadCaption }}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" v-for="days in state.daysAheadList" @click="setDaysAhead(days)">{{days}}</a></li>
+            <ul class="dropdown-menu" aria-labelledby="daysAheadMenuLink">
+                <li><a class="dropdown-item" v-for="days in state.daysAheadList"
+                        @click="setDaysAhead(days)">{{ days }}</a></li>
             </ul>
         </div>
     </ul>
 </template>
 
 <script setup>
-import api from '@/api';
-import { onMounted, reactive, computed } from 'vue';
+import { reactive, computed } from 'vue';
 import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import { useNestboxFilterStore } from '@/stores/nestboxfilter.js'
 
@@ -67,12 +59,10 @@ const state = reactive({
         { caption: 'OK', tab: 1 },
         { caption: 'Ukendt', tab: 2 }
     ],
-    zoneId: 0
-});
-
-onMounted(() => {
-    getZoneList();
-    state.zoneId = nestBoxFilter.filterZone;
+    sortModes: [
+        { caption: 'Boks', value: 0 },
+        { caption: 'Zone', value: 1 }
+    ],
 });
 
 const selectedCaption = computed(() => {
@@ -81,6 +71,10 @@ const selectedCaption = computed(() => {
 
 const daysAheadCaption = computed(() => {
     return nestBoxFilter.daysAhead + ' ' + (nestBoxFilter.daysAhead > 1 ? 'Dage' : 'Dag');
+});
+
+const sortModeCaption = computed(() => {
+    return state.sortModes.filter((item) => item.value == nestBoxFilter.sortMode)[0].caption;
 });
 
 function countForTab(tab) {
@@ -99,19 +93,12 @@ function setFilterForLatter() {
     nestBoxFilter.toggleFilterForLatter();
 };
 
-function setZoneFilter() {
-    nestBoxFilter.setFilterZone(state.zoneId.length > 0 ? state.zoneId : null);
-}
-
-function getZoneList() {
-    api.get('nestbox/zones')
-        .then(res => {
-            state.zoneList = res.data.sort((a, b) => parseInt(a.zoneId.replace(/\D/g, '')) - parseInt(b.zoneId.replace(/\D/g, '')));
-        })
-}
-
 function setDaysAhead(value) {
     nestBoxFilter.daysAhead = value;
+}
+
+function setSortMode(sortMode) {
+    nestBoxFilter.setSortMode(sortMode.value);
 }
 </script>
 

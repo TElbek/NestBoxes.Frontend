@@ -7,10 +7,10 @@
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-      @click="toggleVisible()">
+      @click="toggleVisible()"  v-if="authenticate.isLoggedIn">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''"  v-if="authenticate.isLoggedIn">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item" v-for="route in navBarRoutes">
           <router-link :class="hasComponent(route)" class="nav-link" aria-current="page" :to="routeName(route.name)" @click="toggleVisible()">{{
@@ -24,8 +24,10 @@
 <script setup>
 import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthenticateStore } from '@/stores/authenticate.js';
 
 const router = useRouter();
+const authenticate = useAuthenticateStore();
 
 const state = reactive({
   visible: false

@@ -14,23 +14,26 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use((response) => response, (error) => {
-  if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
-    console.error(error.response.data);
-    console.error(error.response.status);
-    console.error(error.response.headers);
+  const authenticate = useAuthenticateStore();
+  if (error.response) {   
+    if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT) {
+      authenticate.setJwtToken(null);
+      router.replace("/");  
+    }
+    else {
+      console.error(error.response.data);
+      console.error(error.response.status);
+      console.error(error.response.headers);      
+    }
   } else if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
-    console.error(error.request);
-  } else {
-    // Something happened in setting up the request that triggered an Error
-    console.error('Error', error.message);
+    if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT) { 
+      authenticate.setJwtToken(null);
+      router.replace("/");  
+    } 
+    else {
+      console.error(error.request);
+    }
   }
-  console.error(error.config);
-  // throw error;
 });
 
 export default api;

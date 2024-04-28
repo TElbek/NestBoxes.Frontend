@@ -32,7 +32,7 @@ body {
 
 @media only screen and (min-width: 1600px) {
   body {
-    width: 80%;
+    width: 90%;
     margin: auto;
   }
 }

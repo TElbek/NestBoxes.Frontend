@@ -1,20 +1,25 @@
 <template>
     <div v-if="state.hasData">
         <div class="h4" v-if="state.hasBox">
-            Kasse {{ state.nestBox.properties.boxId }}&nbsp;{{ state.nestBox.properties.orientation }} : {{ formatDate(state.record.datetime) }}
+            Kasse {{ state.nestBox.properties.boxId }}&nbsp;{{ state.nestBox.properties.orientation }}
         </div>
         <form>
-            <!-- <div class="mb-3">
-                <label for="datepicker" class="form-check-label">Dato</label>
-                <input id="datepicker" type="date" v-model="state.record.datetime" class="form-control" lang="da-DK" v-focus />
-            </div> -->
-            <div class="mb-3">
-                <label for="status-select" class="form-check-label">Status</label>
-                <select class="form-select" id="status-select" v-model="state.record.status" v-focus>
-                    <option v-for="option in state.statusList" :value="option">
-                        {{ option.statusName }}
-                    </option>
-                </select>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                        <label for="datepicker" class="form-check-label">Dato</label>
+                        <input id="datepicker" type="date" v-model="state.record.datetime" class="form-control"
+                            lang="da-DK" v-focus />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="status-select" class="form-check-label">Status</label>
+                    <select class="form-select" id="status-select" v-model="state.record.status" v-focus>
+                        <option v-for="option in state.statusList" :value="option">
+                            {{ option.statusName }}
+                        </option>
+                    </select>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="species-input" class="form-check-label">Art</label>
@@ -132,12 +137,11 @@ onMounted(() => {
 
 function formatDate(date) {
     var options = {
+        year: 'numeric',
         day: '2-digit',
-        month: 'long',
-        hour: '2-digit',
-        minute: '2-digit'
+        month: '2-digit'
     }
-    return new Date(date).toLocaleDateString('da-dk', options);
+    return new Date(date).toLocaleDateString('en-GB', options);
 }
 </script>
 
