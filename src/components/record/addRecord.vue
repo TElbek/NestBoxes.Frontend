@@ -8,13 +8,13 @@
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
                         <label for="datepicker" class="form-check-label">Dato</label>
-                        <input id="datepicker" type="date" v-model="state.record.datetime" class="form-control"
+                        <input id="datepicker" type="date" v-model="state.record.recorddate" class="form-control"
                             lang="da-DK" v-focus />
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <label for="status-select" class="form-check-label">Status</label>
-                    <select class="form-select" id="status-select" v-model="state.record.status" v-focus>
+                    <select class="form-select" id="status-select" v-model="state.record.status">
                         <option v-for="option in state.statusList" :value="option">
                             {{ option.statusName }}
                         </option>

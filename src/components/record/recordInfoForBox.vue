@@ -4,7 +4,7 @@
         <div v-if="hasSpecies" class="h6 fw-normal">{{ state.recordInfo.nesting.species }}</div>
         <div v-else>&nbsp;</div>
         <div class="fs-small text-nowrap">
-            <span>{{ formatDate(state.recordInfo.datetime) }}</span>
+            <span>{{ formatDate(state.recordInfo.recorddate) }}</span>
             <template v-if="hasValue(state.recordInfo.nesting.eggs) || hasValue(state.recordInfo.nesting.chicks)">
                 <span>&nbsp;-&nbsp;</span>
                 <span v-if="hasValue(state.recordInfo.nesting.eggs)">&nbsp;{{ state.recordInfo.nesting.eggs }} Æg</span>

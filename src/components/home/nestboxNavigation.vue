@@ -114,4 +114,8 @@ function setSortMode(sortMode) {
     color: #000000;
     background-color: #cfcfcf60;
 }
+
+.btn {
+    --bs-btn-padding-y: 0.33rem
+}
 </style>
