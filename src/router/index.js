@@ -7,25 +7,37 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      meta: { showInNavBar: true, title: 'Redekasser', short: 'Redekasser', requiresAuth: true },
+      meta: { showInNavBar: true, title: 'Redekasser', requiresAuth: true },
       component: () => import('../components/home/nestboxOverview.vue')
     },
     {
       path: '/addRecord/:fid',
       name: 'addRecord',
-      meta: { showInNavBar: false, title: 'Opret Registrering', short: '', requiresAuth: true },
+      meta: { showInNavBar: false, title:'',  requiresAuth: true },
       component: () => import('../components/record/addRecord.vue')
+    },
+    {
+      path: '/export/records',
+      name: 'exportrecords',
+      meta: { showInNavBar: false, title: 'Eksport - Redekasse Status',  requiresAuth: true },
+      component: () => import('../components/export/exportrecords.vue')
+    },
+    {
+      path: '/export/checkme',
+      name: 'exportcheckme',
+      meta: { showInNavBar: false, title: 'Eksport - Udestående Redekassetjek',  requiresAuth: true },
+      component: () => import('../components/export/exportchecklists.vue')
     },
     {
       path: '/login',
       name: 'login',
-      meta: { showInNavBar: false, title: 'Login', short: 'Login', requiresAuth: false },
+      meta: { showInNavBar: false, title: 'Login',  requiresAuth: false },
       component: () => import('../components/main/login.vue')
     },
     {
       path: '/logout',
       name: 'logout',
-      meta: { showInNavBar: true, title: 'Log ud', short: 'Log ud', requiresAuth: false },
+      meta: { showInNavBar: true, title: 'Log ud',  requiresAuth: false },
       component: () => import('../components/main/logout.vue')
     }
   ]

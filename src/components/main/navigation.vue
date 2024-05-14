@@ -12,9 +12,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''"  v-if="authenticate.isLoggedIn">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" v-for="route in navBarRoutes">
-          <router-link :class="hasComponent(route)" class="nav-link" aria-current="page" :to="routeName(route.name)" @click="toggleVisible()">{{
-        route.meta.short }}</router-link>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/" @click="toggleVisible()">Redekasse</router-link>
+        </li>
+        <li class="nav-item dropdown">          
+          <a class="nav-link dropdown-toggle" href="#" id="export-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Eksport
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="export-dropdown">
+            <li>
+              <router-link class="nav-link text-nowrap" to="/export/records">Redekasse Status</router-link>
+            </li>
+            <li>
+              <router-link class="nav-link text-nowrap" to="/export/checkme">Udestående Redekassetjek</router-link>
+            </li>
+          </ul>
+        </li> 
+        <li class="nav-item">
+          <router-link class="nav-link" to="/logout" @click="toggleVisible()">Log Ud</router-link>
         </li>
       </ul>
     </div>

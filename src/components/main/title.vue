@@ -1,7 +1,5 @@
 <template>
-    <div class="d-lg-none mb-2">
-        <span class="h4 p-1">{{ route.meta.title }}</span>
-    </div>
+    <div class="h4 p-1">{{ route.meta.title }}</div>
 </template>
 
 <script setup>
