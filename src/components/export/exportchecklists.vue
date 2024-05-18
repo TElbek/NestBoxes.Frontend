@@ -6,9 +6,12 @@
 <script setup>
 import api from '@/api';
 import vueTitle from '@/components/main/title.vue'
+import { useNestboxFilterStore } from '@/stores/nestboxfilter.js'
+
+const nestBoxFilter = useNestboxFilterStore();
 
 function getExport() {
-    api.get('nestbox/download/checkme?before=8', {responseType: 'blob' }).then(res => {
+    api.get('nestbox/download/checkme?before=' + nestBoxFilter.daysAhead, {responseType: 'blob' }).then(res => {
         // create file link in browser's memory
         const href = URL.createObjectURL(res.data);
 
