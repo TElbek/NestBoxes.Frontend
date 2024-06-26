@@ -1,6 +1,6 @@
 <template>
     <div class="mb-3 scroll">
-        <div class="row row-cols-1 row-cols-sm-3 row-cols-xl-6 g-2">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-2">
             <div v-for="box in nestBoxList" class="col">
                 <nestbox :nestbox="box" :showBrief="showBrief"></nestbox>
             </div>
