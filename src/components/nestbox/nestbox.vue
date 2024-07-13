@@ -1,19 +1,19 @@
 <template>
     <div class="card p-2 shadow-sm" :class="[!props.showBrief ? 'card-height' : '']">
         <div class="card-body">
-            <router-link :to="`/addRecord/${nestbox.fid}`">
-                <record-info :fid="nestbox.fid" v-if="!showBrief">
-                    <nestbox-altitute-zone :nestbox="nestbox"></nestbox-altitute-zone>
+            <router-link :to="`/addRecord/${nestbox.properties.fid}`">
+                <record-info :recordInfo="nestbox.records[0]" v-if="!showBrief">
+                    <nestbox-altitute-zone :nestbox="nestbox.properties"></nestbox-altitute-zone>
                     <div class="h6 fw-bold">
-                        <span>{{ nestbox.boxId }}</span>
-                        <span>&nbsp;{{ nestbox.orientation }}</span>
+                        <span>{{ nestbox.properties.boxId }}</span>
+                        <span>&nbsp;{{ nestbox.properties.orientation }}</span>
                     </div>            
                 </record-info>
                 <div v-else>
-                    <nestbox-altitute-zone :nestbox="nestbox"></nestbox-altitute-zone>
+                    <nestbox-altitute-zone :nestbox="nestbox.properties"></nestbox-altitute-zone>
                     <div class="h6 fw-bold">
-                        <span>{{ nestbox.boxId }}</span>
-                        <span>&nbsp;{{ nestbox.orientation }}</span>
+                        <span>{{ nestbox.properties.boxId }}</span>
+                        <span>&nbsp;{{ nestbox.properties.orientation }}</span>
                     </div>            
                 </div>
             </router-link>

@@ -18,7 +18,7 @@ api.interceptors.response.use((response) => response, (error) => {
   if (error.response) {   
     if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT) {
       authenticate.setJwtToken(null);
-      router.replace("/");  
+      // location.reload("/");
     }
     else {
       console.error(error.response.data);

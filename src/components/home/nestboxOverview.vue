@@ -48,7 +48,7 @@ onMounted(() => {
 });
 
 function getNestBoxes() {
-    api.get('nestbox/checkme?before=' + nestBoxFilter.daysAhead)
+    api.get('nestbox/checkme2?before=' + nestBoxFilter.daysAhead)
         .then(res => {
             state.nestBoxList = res.data;
             state.hasData = true;
@@ -56,14 +56,14 @@ function getNestBoxes() {
 };
 
 function getSortedByFid(list) {
-    return list.sort((a, b) => parseInt(a.boxId) - parseInt(b.boxId));
+    return list.sort((a, b) => parseInt(a.properties.boxId) - parseInt(b.properties.boxId));
 }
 
 function getNestBoxFiltered(list) {
     var result = list;
 
     if (nestBoxFilter.filterForLatter) {
-        result = list.filter((item) => item.altitude == 2);
+        result = list.filter((item) => item.properties.altitude == 2);
     }
 
     return getSortedByFid(result);
