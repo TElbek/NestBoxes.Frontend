@@ -7,16 +7,18 @@
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-      @click="toggleVisible()"  v-if="authenticate.isLoggedIn">
+      @click="toggleVisible()" v-if="authenticate.isLoggedIn">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''"  v-if="authenticate.isLoggedIn">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''"
+      v-if="authenticate.isLoggedIn">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <router-link class="nav-link" to="/" @click="toggleVisible()">Redekasse</router-link>
         </li>
-        <li class="nav-item dropdown">          
-          <a class="nav-link dropdown-toggle" href="#" id="export-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="export-dropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Eksport
           </a>
           <ul class="dropdown-menu" aria-labelledby="export-dropdown">
@@ -27,9 +29,17 @@
               <router-link class="nav-link text-nowrap" to="/export/checkme">Udestående Redekassetjek</router-link>
             </li>
           </ul>
-        </li> 
+        </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/logout" @click="toggleVisible()">Log Ud</router-link>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto" v-if="isNotProduction">
+        <li class="nav-item d-none d-md-block">
+          <div class="nav-link">{{ apiUrl }}</div>
+        </li>
+        <li class="nav-item d-none d-md-block">
+          <div class="nav-link">{{ mode }}</div>
         </li>
       </ul>
     </div>
@@ -38,10 +48,8 @@
 
 <script setup>
 import { computed, reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import { useAuthenticateStore } from '@/stores/authenticate.js';
 
-const router = useRouter();
 const authenticate = useAuthenticateStore();
 
 const state = reactive({
@@ -52,18 +60,9 @@ function toggleVisible() {
   state.visible = !state.visible;
 }
 
-function routeName(name) {
-  return "/" + (name != 'home' ? name : "");
-};
-
-function hasComponent(route) {
-  return route.hasOwnProperty('component') ? '' : 'disabled';
-}
-
-const navBarRoutes = computed(() => {
-  return router.options.routes.filter((item) => item.meta.showInNavBar == true);
-});
-
+const apiUrl = computed(() => import.meta.env.VITE_VUE_API_BASE_URL);
+const isNotProduction = computed(() => mode  != 'production');
+const mode = computed(() => import.meta.env.MODE);
 </script>
 
 <style scoped>
