@@ -35,20 +35,16 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto" v-if="isNotProduction">
-        <li class="nav-item d-none d-md-block">
-          <div class="nav-link">{{ apiUrl }}</div>
-        </li>
-        <li class="nav-item d-none d-md-block">
-          <div class="nav-link">{{ mode }}</div>
-        </li>
+        <div class="d-none d-md-block nestbox-tooltip" :title="`Build: ${mode.toUpperCase()} API-url: ${apiUrl.toUpperCase()}`" data-bs-toggle="tooltip" data-bs-placement="top">Info</div>
       </ul>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue';
+import { onMounted, computed, reactive } from 'vue';
 import { useAuthenticateStore } from '@/stores/authenticate.js';
+import { Tooltip } from 'bootstrap';
 
 const authenticate = useAuthenticateStore();
 
@@ -60,8 +56,14 @@ function toggleVisible() {
   state.visible = !state.visible;
 }
 
+onMounted(() => {
+  new Tooltip(document.body, {
+    selector: "[data-bs-toggle='tooltip']",
+  })
+});
+
 const apiUrl = computed(() => import.meta.env.VITE_VUE_API_BASE_URL);
-const isNotProduction = computed(() => mode  != 'production');
+const isNotProduction = computed(() => mode != 'production');
 const mode = computed(() => import.meta.env.MODE);
 </script>
 
@@ -92,5 +94,9 @@ const mode = computed(() => import.meta.env.MODE);
 
 .router-link-active {
   font-weight: 700;
+}
+
+.nestbox-tooltip {
+  --bs-tooltip-bg: var(--bs-secondary);
 }
 </style>
