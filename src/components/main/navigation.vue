@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg sticky-top bg-white mb-2">
+  <nav class="navbar navbar-expand-lg sticky-top mb-2 mt-1" :class="[mode == 'staging' ? 'border border-secondary rounded shadow' : '']">
     <div class="navbar-header">
-      <router-link aria-current="page" to="/" active-class="empty">
+      <router-link aria-current="page" to="/" active-class="empty" class="ms-1">
         <img class="site-logo" src="@/assets/nestbox.png" width="80">
       </router-link>
     </div>
@@ -35,7 +35,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto" v-if="isNotProduction">
-        <div class="d-none d-md-block nestbox-tooltip" :title="`Build: ${mode.toUpperCase()} API-url: ${apiUrl.toUpperCase()}`" data-bs-toggle="tooltip" data-bs-placement="top">Info</div>
+        <div class="nav-link me-2 d-none d-md-block nestbox-tooltip" :title="`Build: ${mode.toUpperCase()} API-url: ${apiUrl.toUpperCase()}`" data-bs-toggle="tooltip" data-bs-placement="top">Info</div>
       </ul>
     </div>
   </nav>

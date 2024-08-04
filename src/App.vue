@@ -10,6 +10,10 @@ const state = reactive({
 function setTitle(title) {
     state.title = title;
 };
+
+function mode() {
+  return import.meta.env.MODE;
+}
 </script>
 
 <template>
@@ -20,10 +24,6 @@ function setTitle(title) {
 </template>
 
 <style>
-body {
-  color: rgba(0,0,0, .75);
-}
-
 @media only screen and (max-width: 1600px) {
   body {
     width: 100%;
