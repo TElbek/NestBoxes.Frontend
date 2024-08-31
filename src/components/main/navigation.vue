@@ -63,7 +63,7 @@ onMounted(() => {
 });
 
 const apiUrl = computed(() => import.meta.env.VITE_VUE_API_BASE_URL);
-const isNotProduction = computed(() => mode != 'production');
+const isNotProduction = computed(() => mode.value != 'production');
 const mode = computed(() => import.meta.env.MODE);
 </script>
 
