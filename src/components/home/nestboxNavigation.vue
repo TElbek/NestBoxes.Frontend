@@ -1,20 +1,26 @@
 <template>
     <ul class="nav nav-pills" id="myTab" role="tablist">
         <li class="nav-item px-1 d-none d-md-block" role="presentation" v-for="status in state.statusses">
-            <button class="nav-link" id="check-tab" data-bs-toggle="tab" data-bs-target="#check" type="button"
-                role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
-                :class="[status.tab == tabSelected.index ? 'active' : '']">{{ status.caption }}: {{
-                    countForTab(status.tab) }}</button>
+            <button class="nav-link status-item-grid" id="check-tab" data-bs-toggle="tab" data-bs-target="#check"
+                type="button" role="tab" aria-controls="check" aria-selected="true" @click="setActiveTab(status.tab)"
+                :class="[status.tab == tabSelected.index ? 'active' : '']">
+                <div>{{ status.caption }}</div>
+                <div>{{ countForTab(status.tab) }}</div>
+            </button>
         </li>
 
         <li class="nav-item dropdown px-0 d-md-none">
             <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                 aria-expanded="false">
-                {{ selectedCaption }}: {{ countForTab(tabSelected.index) }}
+                <span class="me-3">{{ selectedCaption }}</span>
+                <span> {{ countForTab(tabSelected.index) }}</span>
             </a>
             <ul class="dropdown-menu">
-                <li v-for="status in state.statusses" class="dropdown-item" @click="setActiveTab(status.tab)">{{
-                    countForTab(status.tab) }}: {{ status.caption }}</li>
+                <li v-for="status in state.statusses" class="dropdown-item status-item-grid"
+                    @click="setActiveTab(status.tab)">
+                    <div>{{ status.caption }}</div>
+                    <div> {{ countForTab(status.tab) }}</div>
+                </li>
             </ul>
         </li>
 
@@ -30,8 +36,8 @@
                 {{ daysAheadCaption }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="daysAheadMenuLink">
-                <li><a class="dropdown-item" v-for="days in state.daysAheadList"
-                        @click="setDaysAhead(days)">{{ days }}</a></li>
+                <li><a class="dropdown-item" v-for="days in state.daysAheadList" @click="setDaysAhead(days)">{{ days
+                        }}</a></li>
             </ul>
         </div>
     </ul>
@@ -103,19 +109,32 @@ function setSortMode(sortMode) {
 </script>
 
 <style scoped>
+.dropdown-item {
+    cursor: pointer;
+}
+
 .nav-pills .nav-link {
     width: 110px;
-    padding: 5px;
     color: #000000;
 }
+
+.nav-pills .nav-link {
+    border: 1px solid #efefef;
+}
+
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #000000;
-    background-color: #cfcfcf60;
+    background-color: #cfcfcf80;
 }
 
 .btn {
     --bs-btn-padding-y: 0.33rem
+}
+
+.status-item-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
 }
 </style>
