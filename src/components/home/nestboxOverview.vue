@@ -1,8 +1,14 @@
 <template>
     <div v-if="state.hasData">
-        <div>
-            <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
-                :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
+        <div class="row">
+            <div class="col-auto col-md">
+                <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
+                    :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
+            </div>
+            <div class="col col-md-2">
+                <input type="search" class="form-control" v-model="searchValue"
+                    placeholder="Search..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']"/>
+            </div>
         </div>
         <div>
             <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
@@ -17,16 +23,18 @@
 
 <script setup>
 import api from '@/api';
-import { storeToRefs } from 'pinia'
-import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import navigation from '@/components/home/nestboxNavigation.vue';
-import loopNestBox from '@/components/nestbox/loopNestBox.vue';
-import { useNestboxFilterStore } from '@/stores/nestboxfilter.js'
+import loopNestBox from '@/components/nestbox/loopNestBox.vue'; import { storeToRefs } from 'pinia'
+
+import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
+import { useNestboxFilterStore } from '@/stores/nestboxfilter.js';
+import { searchItemForValue } from '@/js/searchItem.js';
 
 const tabSelected = useTabSelectedStore()
 const nestBoxFilter = useNestboxFilterStore();
 
 const { daysAhead } = storeToRefs(nestBoxFilter)
+const { searchValue } = storeToRefs(nestBoxFilter)
 
 import { onMounted, reactive, computed, watch } from 'vue';
 
@@ -42,6 +50,13 @@ const boxesNotCheckedCount = computed(() => boxesNotCheckedList.value.length);
 const boxesForCheckingList = computed(() => getNestBoxFiltered(state.nestBoxList.boxesForChecking));
 const boxesCheckedList = computed(() => getNestBoxFiltered(state.nestBoxList.boxesChecked));
 const boxesNotCheckedList = computed(() => getNestBoxFiltered(state.nestBoxList.boxesNotChecked));
+
+const hasSearchValue = computed(() => {
+    return isNaN(nestBoxFilter.searchValue)  &&
+                 nestBoxFilter.searchValue.length >= 3 ||
+           !isNaN(nestBoxFilter.searchValue)   &&
+                 nestBoxFilter.searchValue.length >= 1;
+});
 
 onMounted(() => {
     getNestBoxes();
@@ -64,6 +79,10 @@ function getNestBoxFiltered(list) {
 
     if (nestBoxFilter.filterForLatter) {
         result = list.filter((item) => item.properties.altitude == 2);
+    }
+
+    else if (hasSearchValue.value) {
+        result = result.filter((item) => searchItemForValue(item, nestBoxFilter.searchValue.toLowerCase()))
     }
 
     return getSortedByFid(result);

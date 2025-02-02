@@ -51,4 +51,12 @@ hr {
 .form-check-label {
   font-weight: bolder;
 }
+
+.bg-nestbox-light {
+  background-color: #cfcfcf80;
+}
+
+.bg-nestbox-light:focus {
+  background-color: #cfcfcf80;
+}
 </style>

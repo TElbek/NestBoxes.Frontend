@@ -30,7 +30,7 @@
                 style="width:60px">Stige</button>
         </li>
 
-        <div class="dropdown">
+        <div class="dropdown dropdown-days-ahead">
             <a class="btn dropdown-toggle" href="#" role="button" id="daysAheadMenuLink" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 {{ daysAheadCaption }}
@@ -119,9 +119,8 @@ function setSortMode(sortMode) {
 }
 
 .nav-pills .nav-link {
-    border: 1px solid #efefef;
+    border: 1px solid #cfcfcf80;
 }
-
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
@@ -136,5 +135,10 @@ function setSortMode(sortMode) {
 .status-item-grid {
     display: grid;
     grid-template-columns: 1fr auto;
+}
+
+.dropdown-days-ahead {
+    position: relative;
+    top:2px;
 }
 </style>

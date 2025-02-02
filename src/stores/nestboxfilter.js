@@ -5,6 +5,7 @@ export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
 
     const filterForLatter = ref(false);
     const daysAhead = ref(1);
+    const searchValue = ref('');
 
     function toggleFilterForLatter() {
         filterForLatter.value = !filterForLatter.value;
@@ -14,7 +15,11 @@ export const useNestboxFilterStore = defineStore('nestboxFilter', () => {
         daysAhead.value = value;
     }
 
-    return { toggleFilterForLatter, filterForLatter, daysAhead, setDaysAhead};
+    function setSearchValue(value) {
+        searchValue.value = value;
+    }
+
+    return { toggleFilterForLatter, filterForLatter, daysAhead, setDaysAhead, searchValue, setSearchValue};
 },
 {
     persist: true,
