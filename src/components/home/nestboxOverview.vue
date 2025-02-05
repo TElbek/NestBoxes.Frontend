@@ -7,7 +7,7 @@
             </div>
             <div class="col col-md-2">
                 <input type="search" class="form-control" v-model="searchValue"
-                    placeholder="Search..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']"/>
+                    placeholder="Søg..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']"/>
             </div>
         </div>
         <div>
@@ -81,8 +81,12 @@ function getNestBoxFiltered(list) {
         result = list.filter((item) => item.properties.altitude == 2);
     }
 
-    else if (hasSearchValue.value) {
+    else if (hasSearchValue.value && isNaN(nestBoxFilter.searchValue)) {        
         result = result.filter((item) => searchItemForValue(item, nestBoxFilter.searchValue.toLowerCase()))
+    }
+
+    else if (hasSearchValue.value && !isNaN(nestBoxFilter.searchValue)) {        
+        result = result.filter((item) => item.properties.boxId == nestBoxFilter.searchValue);
     }
 
     return getSortedByFid(result);
