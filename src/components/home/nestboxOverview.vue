@@ -53,7 +53,7 @@ const boxesNotCheckedList = computed(() => getNestBoxFiltered(state.nestBoxList.
 
 const hasSearchValue = computed(() => {
     return isNaN(nestBoxFilter.searchValue)  &&
-                 nestBoxFilter.searchValue.length >= 3 ||
+                 nestBoxFilter.searchValue.length >= 2 ||
            !isNaN(nestBoxFilter.searchValue)   &&
                  nestBoxFilter.searchValue.length >= 1;
 });
@@ -86,7 +86,8 @@ function getNestBoxFiltered(list) {
     }
 
     else if (hasSearchValue.value && !isNaN(nestBoxFilter.searchValue)) {        
-        result = result.filter((item) => item.properties.boxId == nestBoxFilter.searchValue);
+        result = result.filter((item) => item.properties.boxId == nestBoxFilter.searchValue || 
+                                         item.properties.zone == nestBoxFilter.searchValue);
     }
 
     return getSortedByFid(result);

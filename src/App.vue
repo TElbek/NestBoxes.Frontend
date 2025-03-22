@@ -44,10 +44,6 @@ hr {
   margin: 0rem;
 }
 
-.my-shadow {
-  box-shadow: 0 0 3px #00000020;
-}
-
 .form-check-label {
   font-weight: bolder;
 }
