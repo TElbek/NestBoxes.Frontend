@@ -17,16 +17,23 @@ const router = createRouter({
       component: () => import('../components/record/addRecord.vue')
     },
     {
-      path: '/export/records',
-      name: 'exportrecords',
-      meta: { showInNavBar: false, title: 'Eksport - Redekasse Status',  requiresAuth: true },
-      component: () => import('../components/export/exportrecords.vue')
-    },
-    {
-      path: '/export/checkme',
-      name: 'exportcheckme',
-      meta: { showInNavBar: false, title: 'Eksport - Udestående Redekassetjek',  requiresAuth: true },
-      component: () => import('../components/export/exportchecklists.vue')
+      path: '/export',
+      name: 'export',
+      meta: { showInNavBar: false, title: 'Eksport',  requiresAuth: true },
+      children: [
+        {
+          path: '/export/records',
+          name: 'exportrecords',
+          meta: { showInNavBar: true, title: 'Redekasse Status',  requiresAuth: true },
+          component: () => import('../components/export/exportrecords.vue')
+        },
+        {
+          path: '/export/checkme',
+          name: 'exportcheckme',
+          meta: { showInNavBar: true, title: 'Udestående Redekassetjek',  requiresAuth: true },
+          component: () => import('../components/export/exportchecklists.vue')
+        },        
+      ]
     },
     {
       path: '/login',
@@ -37,7 +44,7 @@ const router = createRouter({
     {
       path: '/logout',
       name: 'logout',
-      meta: { showInNavBar: true, title: 'Log ud',  requiresAuth: false },
+      meta: { showInNavBar: true, title: 'Log ud',  requiresAuth: true },
       component: () => import('../components/main/logout.vue')
     }
   ]

@@ -1,73 +1,67 @@
 <template>
-  <nav class="navbar navbar-expand-lg sticky-top mb-2 mt-1" :class="[mode == 'staging' ? 'border border-secondary rounded shadow' : '']">
+  <nav class="navbar navbar-expand-lg mt-2 mb-2">
     <div class="navbar-header">
       <router-link aria-current="page" to="/" active-class="empty" class="ms-1">
         <img class="site-logo" src="@/assets/nestbox.png" width="80">
       </router-link>
-    </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-      @click="toggleVisible()" v-if="authenticate.isLoggedIn">
+    </div>    
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-label="Toggle navigation" v-if="authenticate.isLoggedIn">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" :class="!state.visible ? 'collapse' : ''"
-      v-if="authenticate.isLoggedIn">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/" @click="toggleVisible()">Redekasse</router-link>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="export-dropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Eksport
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="export-dropdown">
-            <li>
-              <router-link class="nav-link text-nowrap" to="/export/records">Redekasse Status</router-link>
-            </li>
-            <li>
-              <router-link class="nav-link text-nowrap" to="/export/checkme">Udestående Redekassetjek</router-link>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/logout" @click="toggleVisible()">Log Ud</router-link>
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-auto" v-if="isNotProduction">
-        <div class="nav-link me-2 d-none d-md-block nestbox-tooltip" :title="`Build: ${mode.toUpperCase()} API-url: ${apiUrl.toUpperCase()}`" data-bs-toggle="tooltip" data-bs-placement="top">Info</div>
-      </ul>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-body">
+        <a class="h4 d-lg-none" href="#">Navigation</a>
+        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+          <li class="nav-item" v-for="route in visibleRoutes"
+            :data-bs-dismiss="[!hasChildren(route) ? 'offcanvas' : '']" :class="[hasChildren(route) ? 'dropdown' : '']">
+            <router-link class="nav-link" :to="route.path" v-if="!hasChildren(route)">{{
+              route.meta.title }}</router-link>
+
+            <template v-if="hasChildren(route)">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ route.meta.title }}
+              </a>
+              <ul class="dropdown-menu">
+                <li v-for="child in route.children" data-bs-dismiss="offcanvas">
+                  <router-link class="dropdown-item" :to="child.path">{{ child.meta.title }}</router-link>
+                </li>
+              </ul>
+            </template>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { onMounted, computed, reactive } from 'vue';
+import { computed } from 'vue';
 import { useAuthenticateStore } from '@/stores/authenticate.js';
-import { Tooltip } from 'bootstrap';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const authenticate = useAuthenticateStore();
 
-const state = reactive({
-  visible: false
+const visibleRoutes = computed(() => {
+  return router.options.routes.filter((route) =>
+    (route.meta.showInNavBar == true || hasChildren(route)) &&
+    (route.meta.requiresAuth && authenticate.isLoggedIn || !route.meta.requiresAuth))
 });
 
-function toggleVisible() {
-  state.visible = !state.visible;
+function hasChildren(route) {
+  return route.children != undefined && route.children.length > 0;
 }
-
-onMounted(() => {
-  new Tooltip(document.body, {
-    selector: "[data-bs-toggle='tooltip']",
-  })
-});
-
-const apiUrl = computed(() => import.meta.env.VITE_VUE_API_BASE_URL);
-const isNotProduction = computed(() => mode.value != 'production');
-const mode = computed(() => import.meta.env.MODE);
 </script>
 
 <style scoped>
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .navbar {
   --bs-navbar-padding-y: 0px;
 }
@@ -96,7 +90,14 @@ const mode = computed(() => import.meta.env.MODE);
   font-weight: 700;
 }
 
-.nestbox-tooltip {
-  --bs-tooltip-bg: var(--bs-secondary);
+.offcanvas {
+  --bs-offcanvas-width: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+  .dropdown-menu {
+    --bs-dropdown-padding-y: 0px;
+    --bs-dropdown-border-width: 0px
+  }
 }
 </style>

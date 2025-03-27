@@ -1,16 +1,16 @@
 <template>
     <div v-if="state.hasData">
-        <div class="row">
-            <div class="col-auto col-md">
+        <div class="d-flex gap-2">
+            <div>
                 <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
                     :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
             </div>
-            <div class="col col-md-2">
-                <input type="search" class="form-control" v-model="searchValue"
+            <div class="ms-auto">
+                <input type="search" class="form-control form-control-sm" v-model="searchValue"
                     placeholder="Søg..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']"/>
             </div>
         </div>
-        <div>
+        <div class="mt-2">
             <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
             </loopNestBox>
             <loopNestBox v-if="tabSelected.index == 1" :nestBoxList="boxesCheckedList">
@@ -99,3 +99,9 @@ watch(daysAhead, async (newDaysAhead, oldDaysAhead) => {
     }
 }); 
 </script>
+
+<style scoped>
+input {
+    width: 120px;
+}
+</style>
