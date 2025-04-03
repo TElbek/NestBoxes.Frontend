@@ -1,19 +1,6 @@
 <script setup>
-import { reactive } from 'vue';
 import { RouterView } from 'vue-router'
 import navigation from '@/components/main/navigation.vue'
-
-const state = reactive({
-    title: ''
-});
-
-function setTitle(title) {
-    state.title = title;
-};
-
-function mode() {
-  return import.meta.env.MODE;
-}
 </script>
 
 <template>
@@ -37,13 +24,6 @@ function mode() {
   }
 }
 
-hr {
-  border: none;
-  height: 1px;
-  background-color: #00000060;
-  margin: 0rem;
-}
-
 .form-check-label {
   font-weight: bolder;
 }
@@ -54,5 +34,10 @@ hr {
 
 .bg-nestbox-light:focus {
   background-color: #cfcfcf80;
+}
+
+.card {
+  --bs-card-border-color: rgba(0,0,0,0.12);
+  --bs-card-border-radius: 5px 0px;
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
     <ul class="nav nav-pills" id="myTab" role="tablist">
         <div class="btn-group d-none d-lg-block">
-            <div v-for="status in state.statusses" class="btn btn-sm" @click="setActiveTab(status.tab)"
+            <div v-for="status in state.statusses" class="btn btn-sm btn-status" @click="setActiveTab(status.tab)"
                 :class="[status.tab == tabSelected.index ? 'btn-secondary' : 'btn-outline-secondary']">
                 <span>{{ status.caption }} {{ countForTab(status.tab) }}</span>
             </div>
         </div>
 
         <div class="d-lg-none dropdown">
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            <button class="btn btn-sm btn-status btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 {{ selectedCaption }} {{ countForTab(tabSelected.index) }}
             </button>
@@ -34,7 +34,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li v-for="days in state.daysAheadList" class="dropdown-item" @click="setDaysAhead(days)">
-                    {{days}}
+                    {{ days }}
                 </li>
             </ul>
         </div>
@@ -77,10 +77,6 @@ const daysAheadCaption = computed(() => {
     return nestBoxFilter.daysAhead + ' ' + (nestBoxFilter.daysAhead > 1 ? 'Dage' : 'Dag');
 });
 
-const sortModeCaption = computed(() => {
-    return state.sortModes.filter((item) => item.value == nestBoxFilter.sortMode)[0].caption;
-});
-
 function countForTab(tab) {
     switch (tab) {
         case 0: return props.boxesForCheckingCount;
@@ -100,10 +96,6 @@ function setFilterForLatter() {
 function setDaysAhead(value) {
     nestBoxFilter.daysAhead = value;
 }
-
-function setSortMode(sortMode) {
-    nestBoxFilter.setSortMode(sortMode.value);
-}
 </script>
 
 <style scoped>
@@ -112,11 +104,11 @@ function setSortMode(sortMode) {
     grid-template-columns: 1fr auto;
 }
 
-.btn {
-    width: 80px;
+.btn-status {
+    width: 100px;
 }
 
 .btn-outline-secondary {
-    border-color: rgba(0,0,0,0.175);
+    border-color: rgba(0,0,0,0.2);
 }
 </style>

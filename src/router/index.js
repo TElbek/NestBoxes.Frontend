@@ -11,6 +11,11 @@ const router = createRouter({
       component: () => import('../components/home/nestboxOverview.vue')
     },
     {
+      path: '/repair',
+      name: 'repair',
+      meta: { showInNavBar: false, title: 'Reparation', requiresAuth: true },
+    },
+    {
       path: '/addRecord/:fid',
       name: 'addRecord',
       meta: { showInNavBar: false, title:'',  requiresAuth: true },

@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg mt-2 mb-2">
+  <nav class="navbar navbar-expand-lg mt-1 mb-1">
     <div class="navbar-header">
       <router-link aria-current="page" to="/" active-class="empty" class="ms-1">
-        <img class="site-logo" src="@/assets/nestbox.png" width="80">
+        <img class="site-logo" src="@/assets/nestbox.png" width="60">
       </router-link>
     </div>    
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"

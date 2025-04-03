@@ -5,12 +5,12 @@
                 <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
                     :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
             </div>
-            <div class="ms-auto">
+            <div class="ms-auto" v-if="!nestBoxFilter.filterForLatter">
                 <input type="search" class="form-control form-control-sm" v-model="searchValue"
                     placeholder="Søg..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']"/>
             </div>
         </div>
-        <div class="mt-2">
+        <div class="mt-1">
             <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
             </loopNestBox>
             <loopNestBox v-if="tabSelected.index == 1" :nestBoxList="boxesCheckedList">

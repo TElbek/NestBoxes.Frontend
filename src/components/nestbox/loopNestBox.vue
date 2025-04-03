@@ -19,7 +19,7 @@ const props = defineProps({
 
 <style scoped>
 .scroll {
-    height: 80vh;
+    height: 81vh;
     overflow-y: auto;
     scrollbar-width: 0px;
     overflow-x: hidden;

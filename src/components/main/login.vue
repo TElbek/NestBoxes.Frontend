@@ -1,6 +1,6 @@
 <template>
     <div class="center-container">
-        <form class="border rounded shadow-sm" @submit.prevent="login">
+        <form class="border rounded" @submit.prevent="login">
             <div class="mb-3">
                 <input type="text" class="form-control" placeholder="Brugernavn" name="uname" v-model="state.username"
                     ref="username" v-focus />

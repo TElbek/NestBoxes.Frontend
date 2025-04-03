@@ -15,7 +15,7 @@
                 <div class="col-12 col-md-6">
                     <label for="status-select" class="form-check-label">Status</label>
                     <select class="form-select" id="status-select" v-model="state.record.status">
-                        <option v-for="option in state.statusList" :value="option">
+                        <option v-for="option in statusListSorted" :value="option">
                             {{ option.statusName }}
                         </option>
                     </select>
@@ -32,11 +32,11 @@
             <div class="row  mb-3">
                 <div class="col">
                     <label for="eggs-input" class="form-check-label">Æg</label>
-                    <input class="form-control" type="number" id="eggs-input" v-model="state.record.nesting.eggs" />
+                    <input class="form-control" type="number" id="eggs-input" v-model="state.record.nesting.eggs" min="0" max="10"/>
                 </div>
                 <div class="col">
                     <label for="chicks-input" class="form-check-label">Unger</label>
-                    <input class="form-control" type="number" id="chicks-input" v-model="state.record.nesting.chicks" />
+                    <input class="form-control" type="number" id="chicks-input" v-model="state.record.nesting.chicks"  min="0" max="10"/>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                 <textarea rows="2" class="form-control" id="comment-text" v-model="state.record.comment" />
             </div>
         </form>
-        <div class="btn-grid">
+        <div class="d-flex gap-2">
             <button class="btn btn-sm btn-success" type="button" @click="save" :disabled="!canDoSave">Gem</button>
             <button class="btn btn-sm btn-dark" type="button" @click="cancel">Fortryd</button>
         </div>
@@ -83,6 +83,10 @@ const state = reactive({
 
 const canDoSave = computed(() => {
     return state.record.status.statusName != null;
+});
+
+const statusListSorted = computed(() => {
+    return state.statusList.sort((a,b) => a.statusName.localeCompare(b.statusName))
 });
 
 function getEmptyRecord() {
@@ -134,21 +138,4 @@ onMounted(() => {
     getStatusList();
     getSpeciesList();
 });
-
-function formatDate(date) {
-    var options = {
-        year: 'numeric',
-        day: '2-digit',
-        month: '2-digit'
-    }
-    return new Date(date).toLocaleDateString('en-GB', options);
-}
 </script>
-
-<style scoped>
-.btn-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 80px);
-    gap: 10px;
-}
-</style>
