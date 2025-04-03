@@ -62,11 +62,7 @@ const state = reactive({
         { caption: 'Tjekkes', tab: 0 },
         { caption: 'OK', tab: 1 },
         { caption: 'Ukendt', tab: 2 }
-    ],
-    sortModes: [
-        { caption: 'Boks', value: 0 },
-        { caption: 'Zone', value: 1 }
-    ],
+    ]
 });
 
 const selectedCaption = computed(() => {
@@ -106,6 +102,11 @@ function setDaysAhead(value) {
 
 .btn-status {
     width: 100px;
+}
+
+.btn-outline-secondary:hover {
+    background-color: white;
+    color: black;
 }
 
 .btn-outline-secondary {
