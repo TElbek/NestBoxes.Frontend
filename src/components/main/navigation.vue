@@ -2,9 +2,10 @@
   <nav class="navbar navbar-expand-lg mt-1 mb-1">
     <div class="navbar-header">
       <router-link aria-current="page" to="/" active-class="empty" class="ms-1">
-        <img class="site-logo" src="@/assets/nestbox.png" width="60">
+        <img v-if="usersettings.darkMode" class="site-logo" src="@/assets/nestbox_dark.png" width="60">
+        <img v-else class="site-logo" src="@/assets/nestbox.png" width="60">
       </router-link>
-    </div>    
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
       aria-controls="offcanvasNavbar" aria-label="Toggle navigation" v-if="authenticate.isLoggedIn">
       <span class="navbar-toggler-icon"></span>
@@ -32,6 +33,10 @@
             </template>
           </li>
         </ul>
+        <div class="form-check form-switch mt-2 d-none">
+          <input class="form-check-input" type="checkbox" role="switch" id="switchDarkMode" v-model="darkMode">
+          <label class="form-check-label" for="switchDarkMode">Mørkt tema</label>
+        </div>
       </div>
     </div>
   </nav>
@@ -40,16 +45,27 @@
 <script setup>
 import { computed } from 'vue';
 import { useAuthenticateStore } from '@/stores/authenticate.js';
+import { useUserSettingsStore } from '@/stores/usersettings.js';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const authenticate = useAuthenticateStore();
+const usersettings = useUserSettingsStore();
 
 const visibleRoutes = computed(() => {
   return router.options.routes.filter((route) =>
     (route.meta.showInNavBar == true || hasChildren(route)) &&
     (route.meta.requiresAuth && authenticate.isLoggedIn || !route.meta.requiresAuth))
 });
+
+const darkMode = computed({
+  get() {
+    return usersettings.darkMode;
+  },
+  set(val) {
+    usersettings.setDarkMode(val)
+  }
+})
 
 function hasChildren(route) {
   return route.children != undefined && route.children.length > 0;
@@ -58,7 +74,6 @@ function hasChildren(route) {
 
 <style scoped>
 a {
-  color: black;
   text-decoration: none;
 }
 
@@ -76,14 +91,6 @@ a {
 
 .site-logo {
   object-fit: cover;
-}
-
-.bg-white {
-  background-color: white;
-}
-
-.empty {
-  border-bottom: 0px solid rgba(0, 0, 0, 0.4);
 }
 
 .router-link-active {

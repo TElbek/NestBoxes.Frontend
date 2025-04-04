@@ -36,11 +36,6 @@ const props = defineProps({
     padding: 0;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-}
-
 .card-height {
     height: 85px;
 }

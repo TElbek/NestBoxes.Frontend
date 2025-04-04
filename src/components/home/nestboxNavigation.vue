@@ -8,7 +8,7 @@
         </div>
 
         <div class="d-lg-none dropdown">
-            <button class="btn btn-sm btn-status btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            <button class="btn btn-sm btn-secondary btn-status dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 {{ selectedCaption }} {{ countForTab(tabSelected.index) }}
             </button>
@@ -16,7 +16,7 @@
                 <li v-for="status in state.statusses" class="dropdown-item status-item-grid"
                     @click="setActiveTab(status.tab)">
                     <div>{{ status.caption }}</div>
-                    <div> {{ countForTab(status.tab) }}</div>
+                    <div>{{ countForTab(status.tab) }}</div>
                 </li>
             </ul>
         </div>
@@ -102,14 +102,5 @@ function setDaysAhead(value) {
 
 .btn-status {
     width: 100px;
-}
-
-.btn-outline-secondary:hover {
-    background-color: white;
-    color: black;
-}
-
-.btn-outline-secondary {
-    border-color: rgba(0,0,0,0.2);
 }
 </style>

@@ -24,7 +24,8 @@
 <script setup>
 import api from '@/api';
 import navigation from '@/components/home/nestboxNavigation.vue';
-import loopNestBox from '@/components/nestbox/loopNestBox.vue'; import { storeToRefs } from 'pinia'
+import loopNestBox from '@/components/nestbox/loopNestBox.vue';
+import { storeToRefs } from 'pinia'
 
 import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import { useNestboxFilterStore } from '@/stores/nestboxfilter.js';
