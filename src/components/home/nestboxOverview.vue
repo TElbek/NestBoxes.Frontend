@@ -7,10 +7,10 @@
             </div>
             <div class="ms-auto" v-if="!nestBoxFilter.filterForLatter">
                 <input type="search" class="form-control form-control-sm" v-model="searchValue"
-                    placeholder="Søg..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']"/>
+                    placeholder="Søg..." :class="[hasSearchValue ? 'bg-nestbox-light' : '']" v-focus/>
             </div>
         </div>
-        <div class="mt-1">
+        <div>
             <loopNestBox v-if="tabSelected.index == 0" :nestBoxList="boxesForCheckingList">
             </loopNestBox>
             <loopNestBox v-if="tabSelected.index == 1" :nestBoxList="boxesCheckedList">
@@ -30,6 +30,10 @@ import { storeToRefs } from 'pinia'
 import { useTabSelectedStore } from '@/stores/overviewtabselected.js';
 import { useNestboxFilterStore } from '@/stores/nestboxfilter.js';
 import { searchItemForValue } from '@/js/searchItem.js';
+
+const vFocus = {
+  mounted: (el) => el.focus()
+}
 
 const tabSelected = useTabSelectedStore()
 const nestBoxFilter = useNestboxFilterStore();
@@ -52,12 +56,15 @@ const boxesForCheckingList = computed(() => getNestBoxFiltered(state.nestBoxList
 const boxesCheckedList = computed(() => getNestBoxFiltered(state.nestBoxList.boxesChecked));
 const boxesNotCheckedList = computed(() => getNestBoxFiltered(state.nestBoxList.boxesNotChecked));
 
+const uniqueOrientations = ['N','NØ','Ø','SØ','V','SV','NV'];
+
 const hasSearchValue = computed(() => {
-    return isNaN(nestBoxFilter.searchValue)  &&
-                 nestBoxFilter.searchValue.length >= 2 ||
-           !isNaN(nestBoxFilter.searchValue)   &&
-                 nestBoxFilter.searchValue.length >= 1;
+    return nestBoxFilter.searchValue.length >= 1 && !isNaN(nestBoxFilter.searchValue) || 
+           nestBoxFilter.searchValue.length >= 2 &&  isNaN(nestBoxFilter.searchValue) || 
+           isOrientationSearchValue.value;
 });
+
+const isOrientationSearchValue = computed(() => {return uniqueOrientations.includes(nestBoxFilter.searchValue.toUpperCase())})
 
 onMounted(() => {
     getNestBoxes();
@@ -83,7 +90,12 @@ function getNestBoxFiltered(list) {
     }
 
     else if (hasSearchValue.value && isNaN(nestBoxFilter.searchValue)) {        
-        result = result.filter((item) => searchItemForValue(item, nestBoxFilter.searchValue.toLowerCase()))
+        if(isOrientationSearchValue.value) {
+            result = result.filter((item) => item.properties.orientation == nestBoxFilter.searchValue.toUpperCase())
+        }
+        else {
+            result = result.filter((item) => searchItemForValue(item, nestBoxFilter.searchValue.toLowerCase()))
+        }
     }
 
     else if (hasSearchValue.value && !isNaN(nestBoxFilter.searchValue)) {        

@@ -34,7 +34,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li v-for="days in state.daysAheadList" class="dropdown-item" @click="setDaysAhead(days)">
-                    {{ days }}
+                    {{ days }} {{ (days == 1 ? 'dag' : 'dage') }}
                 </li>
             </ul>
         </div>
@@ -102,5 +102,9 @@ function setDaysAhead(value) {
 
 .btn-status {
     width: 100px;
+}
+
+.dropdown-item {
+    cursor: pointer;
 }
 </style>

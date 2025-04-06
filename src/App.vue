@@ -32,4 +32,19 @@ a {
     text-decoration: none;
     color: var(--bs-emphasis-color);
 }
+
+.btn-outline-secondary:hover {
+  background-color: inherit;
+  color: inherit;
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: var(--bs-white);
+}
+
+.bg-nestbox-light,
+.bg-nestbox-light:focus
+{
+  background-color: #00000010;
+}
 </style>

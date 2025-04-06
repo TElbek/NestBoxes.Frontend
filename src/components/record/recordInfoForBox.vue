@@ -2,7 +2,6 @@
     <slot class="mr-1"></slot>
     <div>
         <div v-if="hasSpecies" class="h6 fw-normal">{{ props.recordInfo.nesting.species }}</div>
-        <div v-else>&nbsp;</div>
         <div class="fs-small text-nowrap">
             <span>{{ formatDate(props.recordInfo.recorddate) }}</span>
             <template v-if="hasValue(props.recordInfo.nesting.eggs) || hasValue(props.recordInfo.nesting.chicks)">

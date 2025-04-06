@@ -1,20 +1,20 @@
 <template>
-    <div class="card ps-2 pe-2 pb-1 pt-1 shadow-sm" :class="[!props.showBrief ? 'card-height' : '']">
+    <div class="card ps-2 pe-2 pb-1 pt-1 shadow-sm">
         <div class="card-body">
             <router-link :to="`/addRecord/${nestbox.properties.fid}`">
                 <record-info :recordInfo="nestbox.records[0]" v-if="!showBrief">
                     <nestbox-altitute-zone :nestbox="nestbox.properties"></nestbox-altitute-zone>
-                    <div class="fw-bold">
+                    <div class="boxId fw-bold">
                         <span>{{ nestbox.properties.boxId }}</span>
-                        <span>&nbsp;{{ nestbox.properties.orientation }}</span>
-                    </div>            
+                        <span class="ms-1">{{ nestbox.properties.orientation }}</span>
+                    </div>
                 </record-info>
                 <div v-else>
                     <nestbox-altitute-zone :nestbox="nestbox.properties"></nestbox-altitute-zone>
                     <div class="fw-bold">
                         <span>{{ nestbox.properties.boxId }}</span>
                         <span>&nbsp;{{ nestbox.properties.orientation }}</span>
-                    </div>            
+                    </div>
                 </div>
             </router-link>
         </div>
@@ -36,7 +36,7 @@ const props = defineProps({
     padding: 0;
 }
 
-.card-height {
-    height: 85px;
+.boxId {
+    font-size: 1.08rem;
 }
 </style>

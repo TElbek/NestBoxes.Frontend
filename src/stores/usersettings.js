@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useUserSettingsStore = defineStore('usersettings', () => {
-  const darkMode = ref(true)
+  const darkMode = ref(false)
   function setDarkMode(value) {
     darkMode.value = value;
   }

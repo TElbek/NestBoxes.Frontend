@@ -1,8 +1,10 @@
 <template>
-    <div class="float-end h6 fw-normal">
-        <span v-if="nestbox.altitude == 2">Stige</span>
-        <span v-if="nestbox.altitude == 2">&nbsp;-&nbsp;</span>
-        <span>Zone: {{ nestbox.zone }}</span>
+    <div class="float-end">
+        <template v-if="nestbox.altitude == 2">
+            <span>Stige</span>
+            <span class="ms-1 me-1">-</span>
+        </template>
+        <span>Zone {{ nestbox.zone }}</span>
     </div>
 </template>
 
