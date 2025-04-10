@@ -16,6 +16,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { formatDate} from '@/js/dateandtime.js';
 
 const hasSpecies = computed(() => {
     return props.recordInfo.nesting.species != null &&
@@ -28,14 +29,6 @@ const props = defineProps({
 
 function hasValue(value) {
     return value != null && value > 0;
-}
-
-function formatDate(date) {
-    var options = {
-        month: 'long',
-        day: '2-digit'
-    }
-    return new Date(date).toLocaleDateString('da-dk', options);
 }
 </script>
 

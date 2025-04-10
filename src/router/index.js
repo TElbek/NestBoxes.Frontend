@@ -13,7 +13,20 @@ const router = createRouter({
     {
       path: '/repair',
       name: 'repair',
-      meta: { showInNavBar: false, title: 'Reparation', requiresAuth: true },
+      meta: { showInNavBar: true, title: 'Reparation', requiresAuth: true },
+      component: () => import('../components/repair/repairOverview.vue')
+    },
+    {
+      path: '/repair/edit',
+      name: 'repairEdit',
+      meta: { showInNavBar: false, title: 'Rediger Reparation', requiresAuth: true },
+      component: () => import('../components/repair/repairEdit.vue')
+    },
+    {
+      path: '/repair/add',
+      name: 'repairAdd',
+      meta: { showInNavBar: false, title: 'Tilføj Reparation', requiresAuth: true },
+      component: () => import('../components/repair/repairEdit.vue')
     },
     {
       path: '/addRecord/:fid',

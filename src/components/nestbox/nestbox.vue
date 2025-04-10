@@ -13,7 +13,7 @@
                     <nestbox-altitute-zone :nestbox="nestbox.properties"></nestbox-altitute-zone>
                     <div class="fw-bold">
                         <span>{{ nestbox.properties.boxId }}</span>
-                        <span>&nbsp;{{ nestbox.properties.orientation }}</span>
+                        <span class="ms-1">{{ nestbox.properties.orientation }}</span>
                     </div>
                 </div>
             </router-link>
