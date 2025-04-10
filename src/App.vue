@@ -33,7 +33,12 @@ a {
     color: var(--bs-emphasis-color);
 }
 
+.btn-outline-secondary {
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
 .btn-outline-secondary:hover {
+  border: 1px solid var(--bs-border-color-translucent);
   background-color: inherit;
   color: inherit;
 }
