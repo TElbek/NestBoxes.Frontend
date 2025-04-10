@@ -21,13 +21,13 @@
             </ul>
         </div>
 
-        <div class="btn btn-sm ms-2"
+        <div class="btn btn-sm ms-1"
             :class="[nestBoxFilter.filterForLatter ? 'btn-secondary' : 'btn-outline-secondary']"
             @click="setFilterForLatter()">
             Stige
         </div>
 
-        <div class="dropdown ms-2">
+        <div class="dropdown ms-1">
             <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 {{ daysAheadCaption }}

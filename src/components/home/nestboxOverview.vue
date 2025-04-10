@@ -1,6 +1,6 @@
 <template>
     <div v-if="state.hasData">
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-1">
             <div>
                 <navigation :boxesForCheckingCount="boxesForCheckingCount" :boxesCheckedCount="boxesCheckedCount"
                     :boxesNotCheckedCount="boxesNotCheckedCount" class="mb-2"></navigation>
