@@ -7,13 +7,13 @@
     </div>
     <div class="border-top scroll mb-2">
         <div v-if="state.hasData" class="mb-2 row row-cols-1 row-cols-lg-3 g-3">
-            <div v-for="repairType in state.repairTypes">
+            <div v-for="repairTypeId in uniqueRepairTypes">
                 <div class="fw-bold mb-1 mt-2 h5 pb-1">
-                    <span>{{ repairType.repairTypeName }}</span>
-                    <span class="ms-1">({{ countOfReparsForRepairType(repairType.repairTypeId) }})</span>
+                    <span>{{ getRepairTypeNameById(repairTypeId) }}</span>
+                    <span class="ms-1">({{ countOfReparsForRepairType(repairTypeId) }})</span>
                 </div>
                 <div class="row row-cols-1 row-cols-xl-2 g-2">
-                    <div v-for="repair in repairListByRepairType(repairType.repairTypeId)" class="col">
+                    <div v-for="repair in repairListByRepairType(repairTypeId)" class="col">
                         <repair :repair="repair"></repair>
                     </div>
                 </div>
@@ -41,6 +41,10 @@ onMounted(() => {
     getRepairTypes();
 });
 
+const uniqueRepairTypes = computed(() => {
+    return [...new Set(state.repairList.map(repair => repair.repairType.repairTypeId))];
+});
+
 function getRepairList() {
     api.get('repair/list')
         .then(res => {
@@ -57,8 +61,8 @@ function countOfReparsForRepairType(repairTypeId) {
     return repairListByRepairType(repairTypeId).length;
 }
 
-function repairTypeHasRepairs(repairTypeId) {
-    return repairListByRepairType(repairTypeId).length > 0;
+function getRepairTypeNameById(id) {
+    return state.repairTypes.filter((item) => item.repairTypeId == id)[0].repairTypeName;
 }
 
 function getRepairTypes() {
