@@ -1,8 +1,8 @@
 <template>
     <div class="card shadow-sm border">
-        <div class="card-header fw-bold">
+        <div class="card-header">
             <div class="row">
-                <div class="col">{{ props.repair.fid }} skal være BoxId</div>
+                <div class="col  fw-bold">{{ props.repair.nestBoxProperties.boxId }}</div>
                 <div class="col-auto">{{ formatDate(props.repair.datetime) }}</div>
             </div>
         </div>

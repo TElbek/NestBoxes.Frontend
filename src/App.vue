@@ -24,10 +24,6 @@ import navigation from '@/components/main/navigation.vue';
   }
 }
 
-.form-check-label {
-  font-weight: bolder;
-}
-
 a {
     text-decoration: none;
     color: var(--bs-emphasis-color);
