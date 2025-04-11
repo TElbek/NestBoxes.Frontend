@@ -1,5 +1,7 @@
 <template>
     <div v-if="state.hasData">
+        {{ canDoSave }}
+        {{ state.repair }}
         <form>
             <div class="row mb-2">
                 <div class="col-6">
@@ -35,15 +37,21 @@
                 </div>
             </div>
         </form>
+        <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-success" type="button" @click="save" :disabled="!canDoSave">Gem</button>
+            <button class="btn btn-sm btn-dark" type="button" @click="cancel">Fortryd</button>
+        </div>
     </div>
 </template>
 
 <script setup>
 import api from '@/api';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { onMounted, reactive, computed, watch } from 'vue';
 
 const route = useRoute();
+const router = useRouter();
+
 const state = reactive({
     nestBoxList: [],
     repairTypes: [],
@@ -55,6 +63,13 @@ const vFocus = {
   mounted: (el) => el.focus()
 }
 
+const canDoSave = computed(() => {
+    return  state.repair.fid != undefined &&
+            state.repair.repairType.repairTypeId != undefined;
+});
+
+const isAddRoute = computed(() => { return route.name == 'repairAdd' });
+
 onMounted(() => {
     getNestBoxList();
     getRepairTypes();
@@ -63,12 +78,10 @@ onMounted(() => {
     }
 });
 
-const isAddRoute = computed(() => { return route.name == 'repairAdd' });
-
 function getNestBoxList() {
     api.get('nestbox')
         .then(res => {
-            state.nestBoxList = res.data;
+            state.nestBoxList = res.data.sort((a,b) => Number(a.boxId) - Number(b.boxId));
         })
 };
 
@@ -85,5 +98,20 @@ function getNewRepair() {
             state.repair = res.data;
             state.hasData = true;
         });
+}
+
+function save() {
+    api.post('repair/add', state.repair)
+        .then(function (response) {
+            goToList();
+        });
+}
+
+function cancel() {
+    goToList();
+}
+
+function goToList() {
+    router.replace({name: 'repair'});
 }
 </script>

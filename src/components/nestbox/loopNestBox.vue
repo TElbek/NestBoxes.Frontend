@@ -21,16 +21,5 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.scroll {
-    height: 81vh;
-    overflow-y: auto;
-    scrollbar-width: 0px;
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
 
-.scroll::-webkit-scrollbar {
-    display: none;
-}
 </style>
