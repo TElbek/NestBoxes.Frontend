@@ -13,8 +13,8 @@
                     <span class="ms-1">({{ countOfReparsForRepairType(repairTypeId) }})</span>
                 </div>
                 <div class="row row-cols-1 row-cols-xl-2 g-2">
-                    <div v-for="repair in repairListByRepairType(repairTypeId)" class="col">
-                        <repair :repair="repair"></repair>
+                    <div v-for="item in repairListByRepairType(repairTypeId)" class="col">
+                        <repair :repairModel="item"></repair>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,6 @@ const state = reactive({
 });
 
 onMounted(() => {
-    getRepairList();
     getRepairTypes();
 });
 
@@ -69,6 +68,7 @@ function getRepairTypes() {
     api.get('repair/type')
         .then(res => {
             state.repairTypes = res.data.reverse();
+            getRepairList();
         })
 };
 
