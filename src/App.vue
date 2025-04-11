@@ -61,4 +61,8 @@ a {
 .scroll::-webkit-scrollbar {
     display: none;
 }
+
+label {
+  font-weight: bold;
+}
 </style>

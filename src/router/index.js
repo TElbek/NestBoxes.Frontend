@@ -17,7 +17,7 @@ const router = createRouter({
       component: () => import('../components/repair/repairOverview.vue')
     },
     {
-      path: '/repair/edit',
+      path: '/repair/edit/:id',
       name: 'repairEdit',
       meta: { showInNavBar: false, title: 'Rediger Reparation', requiresAuth: true },
       component: () => import('../components/repair/repairEdit.vue')

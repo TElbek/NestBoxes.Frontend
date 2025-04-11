@@ -16,8 +16,8 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use((response) => response, (error) => {
   const authenticate = useAuthenticateStore();
   if (error.response) {   
-    if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT) {
-      authenticate.setJwtToken(null);
+    if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT == true) {
+      // authenticate.setJwtToken(null);
       // location.reload("/");
     }
     else {
@@ -27,8 +27,8 @@ api.interceptors.response.use((response) => response, (error) => {
     }
   } else if (error.request) {
     if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT) { 
-      authenticate.setJwtToken(null);
-      location.reload("/");  
+      // authenticate.setJwtToken(null);
+      // location.reload("/");  
     } 
     else {
       console.error(error.request);

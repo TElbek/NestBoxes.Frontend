@@ -1,5 +1,5 @@
 <template>
-    <div class="card ps-2 pe-2 pb-1 pt-1 shadow-sm">
+    <div class="card ps-2 pe-2 pb-1 pt-1 shadow-sm h-100">
         <div class="card-body">
             <router-link :to="`/addRecord/${nestbox.properties.fid}`">
                 <record-info :recordInfo="nestbox.records[0]" v-if="!showBrief">

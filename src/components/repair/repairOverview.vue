@@ -1,19 +1,25 @@
 <template>
-    <div class="scroll mb-2">
-        <div v-if="state.hasData" class="mb-2 row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <div class="row">
+        <span class="col h4">Reparation</span>
+        <div class="col-auto">
+            <div class="btn btn-sm btn-success" @click="addRepair()">Opret</div>
+        </div>
+    </div>
+    <div class="border-top scroll mb-2">
+        <div v-if="state.hasData" class="mb-2 row row-cols-1 row-cols-lg-3 g-3">
             <div v-for="repairType in state.repairTypes">
-                <template v-if="repairTypeHasRepairs(repairType.repairTypeId)">
-                    <div class="fw-bold mb-1 mt-2 h5">{{ repairType.repairTypeName }}</div>
-                    <div class="row row-cols-1 g-2">
-                        <div v-for="repair in repairListByRepairType(repairType.repairTypeId)" class="col">
-                            <repair :repair="repair"></repair>
-                        </div>
+                <div class="fw-bold mb-1 mt-2 h5 pb-1">
+                    <span>{{ repairType.repairTypeName }}</span>
+                    <span class="ms-1">({{ countOfReparsForRepairType(repairType.repairTypeId) }})</span>
+                </div>
+                <div class="row row-cols-1 row-cols-xl-2 g-2">
+                    <div v-for="repair in repairListByRepairType(repairType.repairTypeId)" class="col">
+                        <repair :repair="repair"></repair>
                     </div>
-                </template>
+                </div>
             </div>
         </div>
     </div>
-    <div class="btn btn-sm btn-success mb-2" @click="addRepair()">Tilføj</div>
 </template>
 
 <script setup>
@@ -47,6 +53,10 @@ function repairListByRepairType(repairTypeId) {
     return state.repairList.filter((item) => item.repairType.repairTypeId == repairTypeId);
 }
 
+function countOfReparsForRepairType(repairTypeId) {
+    return repairListByRepairType(repairTypeId).length;
+}
+
 function repairTypeHasRepairs(repairTypeId) {
     return repairListByRepairType(repairTypeId).length > 0;
 }
@@ -59,6 +69,6 @@ function getRepairTypes() {
 };
 
 function addRepair() {
-    router.push({ name: 'repairAdd' });
+    router.replace({ name: 'repairAdd' });
 }
 </script>
