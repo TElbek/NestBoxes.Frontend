@@ -67,7 +67,7 @@ const vFocus = {
 
 const canDoSave = computed(() => {
     return state.repair.fid != undefined &&
-           state.repair.comment.length > 0 &&
+           state.repair.comment != undefined &&
            state.repair.repairType.repairTypeId != undefined;
 });
 
