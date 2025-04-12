@@ -4,7 +4,8 @@
             <div class="row mb-2">
                 <div class="col-6">
                     <label for="boxId" class="form-check-label">Kasse</label>
-                    <select class="form-select" v-model="state.repair.fid" autocomplete v-focus :disabled="isEditRoute" v-if="isAddRoute">
+                    <select class="form-select" v-model="state.repair.fid" autocomplete v-focus :disabled="isEditRoute"
+                        v-if="isAddRoute">
                         <option v-for="box in state.nestBoxList" :value="box.fid">
                             {{ box.boxId }}
                         </option>
@@ -31,9 +32,12 @@
             </div>
             <div class="row mb-3" v-if="isEditRoute">
                 <div class="col-auto">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" v-model="state.repair.isRepaired" id="status">
-                        <label class="form-check-label" for="status">Udført</label>
+                    <div class="border rounded ps-1 pe-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" v-model="state.repair.isRepaired"
+                                id="status">
+                            <label class="form-check-label" for="status">Udført</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,7 +61,7 @@ const state = reactive({
     nestBoxList: [],
     repairTypes: [],
     repair: {},
-    nestBox: {properties: {boxId: 0}},
+    nestBox: { properties: { boxId: 0 } },
     hasData: false,
 });
 
@@ -67,8 +71,8 @@ const vFocus = {
 
 const canDoSave = computed(() => {
     return state.repair.fid != undefined &&
-           state.repair.comment != undefined &&
-           state.repair.repairType.repairTypeId != undefined;
+        state.repair.comment != undefined &&
+        state.repair.repairType.repairTypeId != undefined;
 });
 
 const isAddRoute = computed(() => { return route.name == 'repairAdd' });

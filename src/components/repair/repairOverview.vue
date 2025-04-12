@@ -41,7 +41,8 @@ onMounted(() => {
 });
 
 const uniqueRepairTypes = computed(() => {
-    return [...new Set(state.repairList.map(repair => repair.repairType.repairTypeId))];
+    const uniqueList = [...new Set(state.repairList.map(repair => repair.repairType.repairTypeId))];
+    return uniqueList.sort((a,b) => a - b).reverse();
 });
 
 function getRepairList() {
