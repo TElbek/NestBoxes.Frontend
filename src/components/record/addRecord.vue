@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="mb-3">
-                        <label for="datepicker" class="form-check-label">Dato</label>
+                        <label for="datepicker" class="form-label">Dato</label>
                         <input id="datepicker" type="date" v-model="state.record.recorddate" class="form-control"
                             lang="da-DK" v-focus />
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label for="status-select" class="form-check-label">Status</label>
+                    <label for="status-select" class="form-label">Status</label>
                     <select class="form-select" id="status-select" v-model="state.record.status">
                         <option v-for="option in statusListSorted" :value="option">
                             {{ option.statusName }}
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="species-input" class="form-check-label">Art</label>
+                <label for="species-input" class="form-label">Art</label>
                 <select class="form-select" id="species-input" v-model="state.record.nesting.species">
                     <option v-for="art in getSpeciesSortedByLocalName()">
                         {{ art.localName }}
@@ -31,28 +31,28 @@
             </div>
             <div class="row  mb-3">
                 <div class="col">
-                    <label for="eggs-input" class="form-check-label">Æg</label>
+                    <label for="eggs-input" class="form-label">Æg</label>
                     <input class="form-control" type="number" id="eggs-input" v-model="state.record.nesting.eggs" min="0" max="10"/>
                 </div>
                 <div class="col">
-                    <label for="chicks-input" class="form-check-label">Unger</label>
+                    <label for="chicks-input" class="form-label">Unger</label>
                     <input class="form-control" type="number" id="chicks-input" v-model="state.record.nesting.chicks"  min="0" max="10"/>
                 </div>
             </div>
 
             <div class="row  mb-3">
                 <div class="col">
-                    <label for="ring-input-from" class="form-check-label">Ringe - fra</label>
+                    <label for="ring-input-from" class="form-label">Ringe - fra</label>
                     <input class="form-control" type="text" id="ring-input-from" v-model="state.record.rings[0]" />
                 </div>
                 <div class="col">
-                    <label for="ring-input-to" class="form-check-label">Ringe - til</label>
+                    <label for="ring-input-to" class="form-label">Ringe - til</label>
                     <input class="form-control" type="text" id="ring-input-to" v-model="state.record.rings[1]" />
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="comment-text" class="form-check-label">Kommentarer</label>
+                <label for="comment-text" class="form-label">Kommentarer</label>
                 <textarea rows="2" class="form-control" id="comment-text" v-model="state.record.comment" />
             </div>
         </form>

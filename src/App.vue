@@ -62,7 +62,12 @@ a {
     display: none;
 }
 
-label {
+.form-label {
+  font-weight: bold;
+  margin-bottom: 0.1rem;
+}
+
+.form-check-label {
   font-weight: bold;
 }
 </style>

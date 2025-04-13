@@ -3,9 +3,9 @@
         <form>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="boxId" class="form-check-label">Kasse</label>
-                    <select class="form-select" v-model="state.repair.fid" autocomplete v-focus :disabled="isEditRoute"
-                        v-if="isAddRoute">
+                    <label for="boxId" class="form-label">Kasse</label>
+                    <select class="form-select" v-model="state.repair.fid" autocomplete :disabled="isEditRoute"
+                        v-if="isAddRoute" v-focus>
                         <option v-for="box in state.nestBoxList" :value="box.fid">
                             {{ box.boxId }}
                         </option>
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <label for="repairType" class="form-check-label">Reparations Type</label>
+                    <label for="repairType" class="form-label">Reparations Type</label>
                     <select class="form-select" v-model="state.repair.repairType.repairTypeId" id="repairType">
                         <option v-for="repairType in state.repairTypes" :value="repairType.repairTypeId">
                             {{ repairType.repairTypeName }}
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-12">
+                <div class="col">
                     <label for="comment" class="form-label">Kommentar</label>
                     <textarea rows="4" id="comment" v-model="state.repair.comment" class="form-control">
                     </textarea>
@@ -52,10 +52,13 @@
 <script setup>
 import api from '@/api';
 import { useRoute, useRouter } from 'vue-router';
-import { onMounted, reactive, computed, watch } from 'vue';
+import { onMounted, reactive, computed } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
+
+const isAddRoute = computed(() => { return route.name == 'repairAdd' });
+const isEditRoute = computed(() => { return route.name == 'repairEdit' });
 
 const state = reactive({
     nestBoxList: [],
@@ -74,9 +77,6 @@ const canDoSave = computed(() => {
         state.repair.comment != undefined &&
         state.repair.repairType.repairTypeId != undefined;
 });
-
-const isAddRoute = computed(() => { return route.name == 'repairAdd' });
-const isEditRoute = computed(() => { return route.name == 'repairEdit' });
 
 onMounted(() => {
     getRepairTypes();
