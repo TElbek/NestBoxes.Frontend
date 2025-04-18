@@ -15,7 +15,6 @@ const state = reactive({
 });
 
 function emitValue() {
-    console.log('event');
     emit('search-event', state.searchText);
 };
 </script>
