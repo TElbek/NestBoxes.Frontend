@@ -70,4 +70,29 @@ a {
 .form-check-label {
   font-weight: bold;
 }
+
+.repair {
+    text-align: center;
+    height: 27px;
+    width: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: inset -2px -2px 3px #00000040;
+    font-family: Segoe UI Symbol;
+}
+
+.small-repair {
+    color: black;
+    background-color: yellow;
+}
+
+.large-repair {
+    color: black;
+    background-color: pink;
+}
+
+.replace-repair {
+    color: white;
+    background-color: red;
+}
 </style>

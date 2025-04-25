@@ -71,7 +71,7 @@ onMounted(() => {
 });
 
 function getNestBoxes() {
-    api.get('nestbox/checkme2?before=' + nestBoxFilter.daysAhead)
+    api.get('nestbox/checkme?before=' + nestBoxFilter.daysAhead)
         .then(res => {
             state.nestBoxList = res.data;
             state.hasData = true;

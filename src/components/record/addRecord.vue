@@ -2,6 +2,7 @@
     <div v-if="state.hasData">
         <div class="h4" v-if="state.hasBox">
             Kasse {{ state.nestBox.properties.boxId }}&nbsp;{{ state.nestBox.properties.orientation }}
+            <span v-if="state.hasRepair" class="ms-2 ps-2 pe-2 pb-1 rounded" :class="getRepairClass(state.repairType.repairTypeId)">{{state.repairType.repairTypeName}}</span>
         </div>
         <form>
             <div class="row">
@@ -67,6 +68,8 @@
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { onMounted, reactive, computed } from 'vue';
+import { getRepairClass } from '@/js/repair.js';
+
 import api from '@/api';
 
 const router = useRouter();
@@ -77,6 +80,8 @@ const state = reactive({
     hasBox: false,
     statusList: [],
     record: {},
+    hasRepair: false,
+    repairType: {},
     nestBox: {},
     speciesList: []
 });
@@ -92,7 +97,9 @@ const statusListSorted = computed(() => {
 function getEmptyRecord() {
     api.get('nestbox/record/' + route.params.fid + "/new")
         .then(res => {
-            state.record = res.data;
+            state.record = res.data.record;
+            state.hasRepair = res.data.hasRepair;
+            state.repairType = res.data.repairType;
             state.hasData = true;
         })
 }

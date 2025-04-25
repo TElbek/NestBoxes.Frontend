@@ -7,6 +7,7 @@
                     <div class="boxId fw-bold">
                         <span>{{ nestbox.properties.boxId }}</span>
                         <span class="ms-1">{{ nestbox.properties.orientation }}</span>
+                        <repair-icon :fid="nestbox.properties.fid" :repairLevel="nestbox.repairLevel"></repair-icon>
                     </div>
                 </record-info>
                 <div v-else>
@@ -24,6 +25,7 @@
 <script setup>
 import recordInfo from '@/components/record/recordInfoForBox.vue';
 import nestboxAltituteZone from '@/components/nestbox/nestboxAltituteZone.vue';
+import repairIcon from '@/components/nestbox/repairIcon.vue';
 
 const props = defineProps({
     nestbox: {},
