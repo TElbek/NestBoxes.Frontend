@@ -14,25 +14,12 @@ api.interceptors.request.use((config) => {
 });
 
 api.interceptors.response.use((response) => response, (error) => {
-  const authenticate = useAuthenticateStore();
   if (error.response) {   
-    if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT == true) {
-      // authenticate.setJwtToken(null);
-      // location.reload("/");
-    }
-    else {
       console.error(error.response.data);
       console.error(error.response.status);
       console.error(error.response.headers);      
-    }
   } else if (error.request) {
-    if(import.meta.env.VITE_VUE_ERROR_THEN_LOGOUT) { 
-      // authenticate.setJwtToken(null);
-      // location.reload("/");  
-    } 
-    else {
       console.error(error.request);
-    }
   }
 });
 
